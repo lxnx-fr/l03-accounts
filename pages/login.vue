@@ -112,7 +112,7 @@ export default {
             minLength(3)
         ),
         maxLength: helpers.withMessage(
-            "Username must be 20 or less chars.",
+            "Username must 20 or less chars.",
             maxLength(20)
         ),
       },
