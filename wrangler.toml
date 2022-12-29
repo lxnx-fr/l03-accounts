@@ -1,0 +1,8 @@
+name = "accounts"
+main = "./.output/server/index.mjs"
+workers_dev = true
+compatibility_date = "2022-09-10"
+account_id = "6c7cebfdffc5cd6ba910f4e839cb0d87"
+route = "accounts.l03.workers.dev"
+[site]
+bucket = ".output/public"
