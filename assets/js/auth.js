@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const apiURL = () => { return "http://158.101.183.96:5555/"}
+export const apiURL = () => { return "https://158.101.183.96/" }
 export const loginState = () => {
     const dLoginDate = getData("user.loginDate");
     const dToken = getData("user.token");
