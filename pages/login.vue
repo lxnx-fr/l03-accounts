@@ -119,7 +119,7 @@ export default {
     }
   },
   mounted() {
-    if (loginState()) this.$router.push("/");
+    if (loginState()) { this.$router.push("/"); }
   },
   methods: {
     async handleLogin(event) {
