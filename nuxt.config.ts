@@ -3,7 +3,7 @@ export default defineNuxtConfig({
     app: {
         head: {
             script: [
-                { src: 'https://fastdl.laurinfrank.de/js/fontawesome.js', async: true, defer: true}
+                { src: 'https://fastdl.l03.dev/js/fontawesome.js', async: true, defer: true}
             ]
         },
         pageTransition: { name: 'page', mode: 'out-in' },

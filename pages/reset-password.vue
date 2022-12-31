@@ -1,9 +1,6 @@
 <template>
   <div class="auth-page">
-    <div
-        v-if="$route.name !== 'empty-reset-password'"
-        class="auth-container animate-fadescale"
-    >
+    <div v-if="$route.name !== 'empty-reset-password'" class="auth-container">
       <h1>Reset Password</h1>
       <h3>Only works with the provided code in the E-Mail</h3>
       <form class="auth-form">
@@ -46,11 +43,11 @@
         Reset Password
       </button>
       <div>
-        <router-link to="/login" class="auth-link success"
-        >Already have an account? Login</router-link
+        <NuxtLink to="/login" class="auth-link success"
+        >Already have an account? Login</NuxtLink
         >
-        <router-link to="/create-account" class="auth-link error"
-        >Create Account</router-link
+        <NuxtLink to="/create-account" class="auth-link error"
+        >Create Account</NuxtLink
         >
       </div>
       <div
@@ -96,6 +93,7 @@
 import useVuelidate from "@vuelidate/core";
 import { required, helpers, minLength, maxLength } from "@vuelidate/validators";
 import {apiURL, loginState} from "/assets/js/auth";
+import axios from "axios";
 function samePassword() {
   return this.password === this.confirmPassword;
 }
@@ -142,7 +140,7 @@ export default {
       console.log("DEV-LOG | 1. Trying to Reset-Password...");
       if (!this.v$.$invalid) {
         console.log("DEV-LOG | 2. Form Validation successfully");
-        const res = this.axios.post(
+        const res = axios.post(
             apiURL() + "api/auth/reset-password",
             {
               code: this.$route.params.code,

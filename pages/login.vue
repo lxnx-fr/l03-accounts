@@ -1,6 +1,7 @@
 <template>
+  <div class="fixed left-0 right-0 spotlight z-10"></div>
   <div class="auth-page">
-    <div v-motion-pop-visible class="auth-container">
+    <div class="auth-container">
       <h1 class="auth-title">Login</h1>
       <h3 class="auth-subtitle">Get an all new experience</h3>
       <ClientOnly>
@@ -14,6 +15,8 @@
               prepend="fa-solid fa-signature"
               label="Username"
               :error="v$.username.$errors.length > 0 ? v$.username.$errors[0].$message : null"
+              label-color="rgba(255,255,255,0.5)"
+              icon-color="rgba(255,255,255,0.9)"
               @field:input="username = $event; v$.username.$touch();"
           />
           <TextField
@@ -22,6 +25,8 @@
               prepend="fa-solid fa-lock"
               :append="showPassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
               label="Password"
+              label-color="rgba(255,255,255,0.5)"
+              icon-color="rgba(255,255,255,0.9)"
               :error="v$.password.$errors.length > 0 ? v$.password.$errors[0].$message : null"
               @field:input="password = $event; v$.password.$touch();"
               @click:append="showPassword = !showPassword"
@@ -29,6 +34,8 @@
           <CheckboxField
               name="device"
               label="Keep this device logged in"
+              label-color="rgba(255,255,255,0.8)"
+              icon-color="rgba(255,255,255,0.95)"
               @field:input="device = $event"
           />
         </form>
@@ -167,26 +174,23 @@ export default {
 .auth-page
   @apply text-center mx-auto h-screen max-h-screen flex items-center justify-center
   .auth-container
-    @apply min-w-min px-14 bg-white py-4 z-20
+    @apply min-w-min px-14 bg-white bg-opacity-5 py-4 z-20
     .auth-title
-      @apply text-4xl text-opacity-80
+      @apply text-4xl text-opacity-80 text-white
     .auth-subtitle
-      @apply text-lg text-opacity-50
+      @apply text-lg text-opacity-50 text-white
     .auth-form-wrapper
       @apply my-4
     .auth-btn-submit
-      @apply relative overflow-hidden bg-indigo-500 w-[90%] rounded-full transition-all duration-500 ease-in-out py-2 text-white
-      &:hover
-        box-shadow: 0 2px 2rem 0 rgba(0, 0, 0, 0.4)
-        @apply scale-90
+      @apply gradient-border py-2.5 text-xl text-white text-opacity-80 max-w-xs w-full cursor-pointer
     .auth-link-wrapper .auth-link
-      @apply m-2 text-xs hover:text-green-500 transition-all ease-in-out duration-300
+      @apply m-2 text-xs text-white text-opacity-75 transition-all ease-in-out duration-300
       &.success:hover
         @apply text-green-500
       &.error:hover
         @apply text-red-500
     .notification-wrapper .notification
-      @apply rounded-full bg-white gap-3 flex-row flex px-4 pb-1.5 pt-2 place-items-center
+      @apply rounded-full bg-white gap-3 flex-row flex px-4 pb-1.5 pt-2 place-items-center mt-4
       &.loading
         @apply bg-yellow-500
         box-shadow: 0 2px 15px 0 #EAB308
@@ -196,4 +200,36 @@ export default {
       &.error
         @apply bg-red-500
         box-shadow: 0 2px 15px 0 #EF4444
+
+.spotlight
+  background: linear-gradient(45deg, #00dc82 0%, #36e4da 50%, #0047e1 100%)
+  filter: blur(20vh)
+  height: 40vh
+  bottom: -30vh
+.gradient-border
+  -webkit-backdrop-filter: blur(10px)
+  backdrop-filter: blur(10px)
+  @apply relative
+.gradient-border
+  background-color: rgba(20, 20, 20, 0.3)
+.gradient-border::before
+  background: linear-gradient(90deg,#303030 0%,#303030 25%,#00dc82 50%,#36e4da 75%,#0047e1 100%)
+.gradient-border::before
+  content: ""
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  padding: 2px
+  width: 100%
+  background-size: 400% auto
+  opacity: 0.5
+  transition: background-position 0.4s ease-in-out, opacity 0.5s ease-in-out
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
+  -webkit-mask-composite: xor
+  mask-composite: exclude
+.gradient-border:hover::before
+  background-position: -50% 0
+  opacity: 1
 </style>
