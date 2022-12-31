@@ -1,12 +1,11 @@
 <template>
   <div class="fixed left-0 right-0 spotlight z-10"></div>
-  <div class="auth-page">
+  <div class="auth-page animate-fadescale">
     <div class="auth-container">
       <h1 class="auth-title">Login</h1>
       <h3 class="auth-subtitle">Get an all new experience</h3>
       <ClientOnly>
         <template #fallback>
-          <!-- this will be rendered on server side -->
           <p>Loading...</p>
         </template>
         <form class="auth-form-wrapper">
@@ -126,7 +125,7 @@ export default {
     }
   },
   mounted() {
-    if (loginState()) { this.$router.push("/"); }
+    if (loginState()) { this.$router.push({ path: "/"}); }
   },
   methods: {
     async handleLogin(event) {

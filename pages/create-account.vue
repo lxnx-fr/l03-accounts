@@ -1,6 +1,6 @@
 <template>
   <div class="auth-page">
-    <div class="auth-container animate-fadescale">
+    <div class="auth-container">
       <h1 class="auth-title">Register</h1>
       <h3 class="auth-subtitle">Get an all new experience</h3>
       <ClientOnly>
@@ -128,7 +128,7 @@ export default {
     };
   },
   mounted() {
-    if (loginState()) this.$router.push("/");
+    if (loginState()) { this.$router.push({ path: "/"}); }
   },
   validations: {
     username: {

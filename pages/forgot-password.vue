@@ -1,6 +1,6 @@
 <template>
   <div class="auth-page">
-    <div class="auth-container animate-fadescale">
+    <div class="auth-container">
       <h1>Forgot Password</h1>
       <ClientOnly>
         <form class="auth-form">
@@ -23,13 +23,12 @@
         Send Request
       </button>
       <div>
-        <router-link to="/login" class="auth-link success"
-        >Already have an account? Login</router-link
-        >
+        <NuxtLink to="/login" class="auth-link success"
+        >Already have an account? Login</NuxtLink>
       </div>
       <div
           v-show="notification !== false"
-          class="notification-wrapper animate-fadescale"
+          class="notification-wrapper"
       >
         <div v-if="notification === 'loading'" class="notification loading">
           <span class="pt-1"
@@ -81,7 +80,7 @@ export default {
     };
   },
   mounted() {
-    if (loginState()) this.$router.push("/");
+    if (loginState()) { this.$router.push({ path: "/"}); }
   },
   validations: {
     mail: {

@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f298326b-1b91-4fc7-9a58-3b0295dfb3dd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/js/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/auth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/create-account.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/create-account.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/forgot-password.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forgot-password.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +151,7 @@
       <workItem from="1672363338198" duration="737000" />
       <workItem from="1672422428851" duration="7541000" />
       <workItem from="1672444025077" duration="4904000" />
-      <workItem from="1672467343597" duration="2800000" />
+      <workItem from="1672467343597" duration="4787000" />
     </task>
     <task id="LOCAL-00001" summary="Updated">
       <created>1672345526553</created>
@@ -197,7 +202,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672470010173</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Changed API URL">
+      <created>1672470166044</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1672470166044</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,6 +219,7 @@
     <MESSAGE value="Updated" />
     <MESSAGE value="Updated API_URL" />
     <MESSAGE value="Changed style" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed style" />
+    <MESSAGE value="Changed API URL" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed API URL" />
   </component>
 </project>

@@ -148,14 +148,14 @@ export default {
       this.loadUserData();
       this.loadWebsites();
     } else {
-      this.$router.push("login");
+      this.$router.push({ path: "/login/"});
     }
   },
   methods: {
     handleLogout() {
       this.user = null;
       removeData("user.token")
-      this.$router.push("/login");
+      this.$router.push({ path: "/login/"});
     },
     handleEdit() {
       this.editing = !this.editing;
