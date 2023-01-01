@@ -11,6 +11,7 @@
     </div>
     <div class="field-box">
       <input
+          :id="'textfield__' + name"
         ref="fieldInput"
         :type="type"
         aria-label="dd"
@@ -20,7 +21,7 @@
         @input="handleInput"
         @blur="handleInput"
       />
-      <label class="field-label" :for="name" >{{ label }}<span v-if="labelAddon !== null">{{ labelAddon }}</span></label>
+      <label class="field-label" :for="'textfield__' + name" >{{ label }}<span v-if="labelAddon !== null">{{ labelAddon }}</span></label>
       <div class="field-line" />
       <div
         v-if="append !== null"

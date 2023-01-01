@@ -2,6 +2,7 @@
   <div :id="'checkbox__' + name" class="checkbox-wrapper">
     <div class="field-box">
       <input
+          :id="'checkbox__' + name"
         ref="fieldInput"
         class="field-checkbox"
         :name="name"
@@ -10,7 +11,7 @@
         @blur="handleInput"
       />
 
-      <label class="field-label" :for="name">
+      <label class="field-label" :for="'checkbox__' + name">
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M22.3,61.3c5.7,4.1,13.2,11.8,16.7,18C53,60.5,66,41,77.7,20.8"
