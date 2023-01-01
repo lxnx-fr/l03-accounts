@@ -3,7 +3,7 @@
   <div class="auth-page">
     <div class="auth-container">
       <h1 class="title">Register</h1>
-      <h3 class="subtitle">Get an all new experience</h3>
+      <h2 class="subtitle">Get an all new experience</h2>
       <ClientOnly>
         <form class="form-wrapper">
           <TextField
@@ -226,6 +226,3 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
-
-</style>

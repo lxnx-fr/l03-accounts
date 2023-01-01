@@ -13,6 +13,7 @@
       <input
         ref="fieldInput"
         :type="type"
+        aria-label="dd"
         class="field-input"
         :name="name"
         placeholder=" "

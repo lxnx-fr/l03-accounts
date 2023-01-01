@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f298326b-1b91-4fc7-9a58-3b0295dfb3dd" name="Changes" comment="">
+    <list default="true" id="f298326b-1b91-4fc7-9a58-3b0295dfb3dd" name="Changes" comment="Added meta tags">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/TextField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/TextField.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nuxt.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nuxt.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/about.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/about.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/create-account.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/create-account.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/forgot-password.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forgot-password.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/reset-password/[code].vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/reset-password/[code].vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672608359684</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Updates nuxt.config.ts">
+      <created>1672612514692</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1672612514692</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

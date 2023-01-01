@@ -3,7 +3,7 @@
   <div class="auth-page">
     <div class="auth-container">
       <h1 class="title">Reset Password</h1>
-      <h3 class="subtitle">Set a new password</h3>
+      <h2 class="subtitle">Set a new password</h2>
       <ClientOnly>
         <form class="form-wrapper">
           <TextField
@@ -170,7 +170,3 @@ export default {
   },
 };
 </script>
-
-<style lang="sass" scoped>
-
-</style>
