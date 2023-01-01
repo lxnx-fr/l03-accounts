@@ -1,19 +1,18 @@
 <template>
+  <div class="fixed left-0 right-0 spotlight z-10"></div>
   <div class="auth-page">
-    <div v-motion-pop-visible class="auth-container">
-      <h1 class="auth-title">Login</h1>
-      <h3 class="auth-subtitle">Get an all new experience</h3>
+    <div class="auth-container">
+      <h1 class="title">Login</h1>
+      <h3 class="subtitle">Get an all new experience</h3>
       <ClientOnly>
-        <template #fallback>
-          <!-- this will be rendered on server side -->
-          <p>Loading...</p>
-        </template>
-        <form class="auth-form-wrapper">
+        <form class="form-wrapper">
           <TextField
               name="username"
               prepend="fa-solid fa-signature"
               label="Username"
               :error="v$.username.$errors.length > 0 ? v$.username.$errors[0].$message : null"
+              label-color="rgba(255,255,255,0.5)"
+              icon-color="rgba(255,255,255,0.9)"
               @field:input="username = $event; v$.username.$touch();"
           />
           <TextField
@@ -22,6 +21,8 @@
               prepend="fa-solid fa-lock"
               :append="showPassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
               label="Password"
+              label-color="rgba(255,255,255,0.5)"
+              icon-color="rgba(255,255,255,0.9)"
               :error="v$.password.$errors.length > 0 ? v$.password.$errors[0].$message : null"
               @field:input="password = $event; v$.password.$touch();"
               @click:append="showPassword = !showPassword"
@@ -29,18 +30,19 @@
           <CheckboxField
               name="device"
               label="Keep this device logged in"
+              label-color="rgba(255,255,255,0.8)"
+              icon-color="rgba(255,255,255,0.95)"
               @field:input="device = $event"
           />
         </form>
-        <button class="auth-btn-submit" @click="handleLogin($event)">
+        <button class="btn-submit" @click="handleLogin($event)">
           Sign In
         </button>
-
-        <div class="auth-link-wrapper">
-          <NuxtLink to="/create-account" class="auth-link success">Create account</NuxtLink>
-          <NuxtLink to="/forgot-password" class="auth-link error">Forgot Password?</NuxtLink>
+        <div class="link-wrapper">
+          <NuxtLink to="/create-account" class="link success">Create account</NuxtLink>
+          <NuxtLink to="/forgot-password" class="link error">Forgot Password?</NuxtLink>
         </div>
-        <div v-show="notification !== false" v-motion-pop-visible class="notification-wrapper">
+        <div v-show="notification !== false" class="notification-wrapper">
           <div v-if="notification === 'loading'" class="notification loading">
             <span class="pt-1">
               <i class="fa-duotone fa-spinner-third fa-spin"/>
@@ -77,9 +79,6 @@ export default {
       v$: useVuelidate()
     }
   },
-  created() {
-
-  },
   data() {
     return {
       password: "",
@@ -88,8 +87,6 @@ export default {
       showPassword: false,
       notification: false,
       notificationMessage: "",
-
-      notificationThread: false,
     };
   },
   validations() {
@@ -112,14 +109,14 @@ export default {
             minLength(3)
         ),
         maxLength: helpers.withMessage(
-            "Username must be 20 or less chars.",
+            "Username must 20 or less chars.",
             maxLength(20)
         ),
       },
     }
   },
   mounted() {
-    if (loginState()) this.$router.push("/");
+    if (loginState()) { this.$router.push({ path: "/"}); }
   },
   methods: {
     async handleLogin(event) {
@@ -133,7 +130,7 @@ export default {
           password: this.password,
         })
         this.notification = "loading";
-        document.querySelector('.auth-btn-submit').disabled = true;
+        document.querySelector('.auth-container .btn-submit').disabled = true;
         res.then((response) => {
           const { jwt, user } = response.data;
           let futureDate = new Date();
@@ -145,8 +142,8 @@ export default {
           console.log("Nuxt | 3. Login successfully;", jwt);
           setTimeout(() => {
             this.$router.push("/");
-            document.querySelector('.auth-btn-submit').disabled = false;
-          }, 3000);
+            document.querySelector('.auth-container .btn-submit').disabled = false;
+          }, 2500);
         });
         res.catch((response) => {
           console.log("Nuxt | 3. Login failed;", response);
@@ -154,7 +151,7 @@ export default {
           this.notificationMessage = response.response.data.error.message;
           setTimeout(() => {
             this.notification = false;
-            document.querySelector('.auth-btn-submit').disabled = false;
+            document.querySelector('.auth-container .btn-submit').disabled = false;
           }, 3000);
         });
       }
@@ -167,33 +164,66 @@ export default {
 .auth-page
   @apply text-center mx-auto h-screen max-h-screen flex items-center justify-center
   .auth-container
-    @apply min-w-min px-14 bg-white py-4 z-20
-    .auth-title
-      @apply text-4xl text-opacity-80
-    .auth-subtitle
-      @apply text-lg text-opacity-50
-    .auth-form-wrapper
+    @apply min-w-min px-14 bg-white bg-opacity-5 py-4 z-20 animate-fadescale
+    .title
+      @apply text-4xl text-opacity-80 text-white
+    .subtitle
+      @apply text-lg text-opacity-50 text-white
+    .form-wrapper
       @apply my-4
-    .auth-btn-submit
-      @apply relative overflow-hidden bg-indigo-500 w-[90%] rounded-full transition-all duration-500 ease-in-out py-2 text-white
-      &:hover
-        box-shadow: 0 2px 2rem 0 rgba(0, 0, 0, 0.4)
-        @apply scale-90
-    .auth-link-wrapper .auth-link
-      @apply m-2 text-xs hover:text-green-500 transition-all ease-in-out duration-300
-      &.success:hover
-        @apply text-green-500
-      &.error:hover
-        @apply text-red-500
-    .notification-wrapper .notification
-      @apply rounded-full bg-white gap-3 flex-row flex px-4 pb-1.5 pt-2 place-items-center
-      &.loading
-        @apply bg-yellow-500
-        box-shadow: 0 2px 15px 0 #EAB308
-      &.success
-        @apply bg-green-500
-        box-shadow: 0 2px 15px 0 #22C55E
-      &.error
-        @apply bg-red-500
-        box-shadow: 0 2px 15px 0 #EF4444
+    .btn-submit
+      @apply gradient-border py-2.5 text-xl text-white text-opacity-80 max-w-xs w-full cursor-pointer
+    .link-wrapper
+      @apply mt-2
+      .link
+        @apply m-2 text-xs text-white text-opacity-75 transition-all ease-in-out duration-300
+        &.success:hover
+          @apply text-green-500
+        &.error:hover
+          @apply text-red-500
+    .notification-wrapper
+      @apply animate-fadescale
+      .notification
+        @apply rounded-full bg-white gap-3 flex-row flex px-4 pb-1.5 pt-2 place-items-center mt-4
+        &.loading
+          @apply bg-yellow-500
+          box-shadow: 0 2px 15px 0 #EAB308
+        &.success
+          @apply bg-green-500
+          box-shadow: 0 2px 15px 0 #22C55E
+        &.error
+          @apply bg-red-500
+          box-shadow: 0 2px 15px 0 #EF4444
+
+.spotlight
+  background: linear-gradient(45deg, #00dc82 0%, #36e4da 50%, #0047e1 100%)
+  height: 40vh
+  bottom: -30vh
+  @apply blur-[20vh]
+.gradient-border
+  -webkit-backdrop-filter: blur(10px)
+  backdrop-filter: blur(10px)
+  @apply relative
+.gradient-border
+  background-color: rgba(20, 20, 20, 0.3)
+.gradient-border::before
+  background: linear-gradient(90deg,#303030 0%,#303030 25%,#00dc82 50%,#36e4da 75%,#0047e1 100%)
+.gradient-border::before
+  content: ""
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  padding: 2px
+  width: 100%
+  background-size: 400% auto
+  opacity: 0.5
+  transition: background-position 0.4s ease-in-out, opacity 0.5s ease-in-out
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
+  -webkit-mask-composite: xor
+  mask-composite: exclude
+.gradient-border:hover::before
+  background-position: -50% 0
+  opacity: 1
 </style>

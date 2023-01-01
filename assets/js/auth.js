@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const apiURL = () => { return "http://158.101.183.96:5555/"}
+export const apiURL = () => { return "https://158.101.183.96/" }
 export const loginState = () => {
     const dLoginDate = getData("user.loginDate");
     const dToken = getData("user.token");
@@ -19,24 +19,6 @@ export const loginState = () => {
     }
 };
 
-export const loadDataFromDatabase = () => {
-    const request = axios.get(apiURL() + "api/users/me", {
-        headers: { Authorization: "Bearer " + getData("user.token") },
-    });
-    request.then((response) => {
-        console.log("Nuxt | Downloading user data from database", response);
-        setData("user.data", response.data);
-        return true;
-    });
-    request.catch((response) => {
-        console.log(
-            "Nuxt | Error while downloading user data from database",
-            response
-        );
-        return false;
-    });
-}
-
 export const getData = (key) => {
     return window.localStorage.getItem(key);
 }
@@ -51,5 +33,5 @@ export default {
     setData,
     getData,
     removeData,
-    loadDataFromDatabase,
+
 };

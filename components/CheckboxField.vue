@@ -36,6 +36,14 @@ export default {
       type: String,
       default: "Default Label",
     },
+    labelColor: {
+      type: String,
+      default: "#fff",
+    },
+    iconColor: {
+      type: String,
+      default: "#fff",
+    },
     error: {
       type: String,
       default: null,
@@ -54,6 +62,7 @@ export default {
 .checkbox-wrapper
   @apply mx-auto pt-4 pb-3 w-full
 .field-label
+  color: v-bind(labelColor)
   @apply relative inline-block cursor-pointer transition-colors duration-300 ease-in-out
   span
     @apply pl-7
@@ -64,11 +73,14 @@ export default {
   @apply opacity-0 appearance-none inline-block align-middle z-[100]
 svg
   @apply w-[1.25rem] aspect-square absolute top-0 left-0 pointer-events-none
-  @apply border-solid border-2 border-black rounded-md
+  border-color: v-bind(iconColor)
+  color: v-bind(iconColor)
+  @apply border-solid border-2 rounded-md
   path
     stroke-linecap: round
     stroke-linejoin: round
-    @apply stroke-black fill-[none] stroke-[1rem]
+    stroke: v-bind(iconColor)
+    @apply fill-[none] stroke-[1rem]
     transition: 0.8s stroke-dasharray ease, 0.8s stroke-dashoffset ease, 0.8s stroke ease
 .field-checkbox + .field-label svg path
   stroke-dasharray: 100px 200px
