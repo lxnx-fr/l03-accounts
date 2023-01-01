@@ -3,7 +3,7 @@
   <div class="auth-page">
     <div class="auth-container animate-fadescale">
       <h1 class="auth-title">Forgot Password</h1>
-      <ClientOnly>
+      <ClientOnly >
         <form class="auth-form">
           <TextField
               name="mail"
@@ -159,7 +159,6 @@ export default {
   @apply rounded-full bg-white gap-3 flex-row flex px-4 py-2 place-items-center
 .spotlight
   background: linear-gradient(45deg, #00dc82 0%, #36e4da 50%, #0047e1 100%)
-
   height: 40vh
   bottom: -30vh
   @apply blur-[20vh]

@@ -5,9 +5,6 @@
       <h1 class="title">Login</h1>
       <h3 class="subtitle">Get an all new experience</h3>
       <ClientOnly>
-        <template #fallback>
-          <p>Loading...</p>
-        </template>
         <form class="form-wrapper">
           <TextField
               name="username"

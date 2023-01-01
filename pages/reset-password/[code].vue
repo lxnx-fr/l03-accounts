@@ -5,9 +5,6 @@
       <h1 class="title">Reset Password</h1>
       <h3 class="subtitle">Set a new password</h3>
       <ClientOnly>
-        <template #fallback>
-          <p>Loading...</p>
-        </template>
         <form class="form-wrapper">
           <TextField
               name="password"
