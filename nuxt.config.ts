@@ -1,21 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 
-    router: {
-        options: {
-
-        }
-    },
     app: {
         baseURL: "",
         head: {
-            link: [
-                { href: 'https://fastdl.l03.dev/js/fontawesome.js', as: "script", crossorigin: "", rel: "preload" }
+            script: [
+                { src: 'https://fastdl.l03.dev/js/fontawesome.js', defer: true, async: true }
             ]
         },
 
     },
     modules: [
+        '@nuxtjs/robots',
         '@nuxtjs/tailwindcss',
         'nuxt-icon',
         '@vueuse/motion/nuxt'
