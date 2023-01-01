@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f298326b-1b91-4fc7-9a58-3b0295dfb3dd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/forgot-password.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forgot-password.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/reset-password/[code].vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/reset-password/[code].vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +147,7 @@
       <workItem from="1672363338198" duration="737000" />
       <workItem from="1672422428851" duration="7541000" />
       <workItem from="1672444025077" duration="4904000" />
-      <workItem from="1672467343597" duration="12540000" />
+      <workItem from="1672467343597" duration="13741000" />
     </task>
     <task id="LOCAL-00001" summary="Updated">
       <created>1672345526553</created>
@@ -223,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672546559910</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Removed Loading Placeholders on forms">
+      <created>1672585034950</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1672585034950</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,6 +239,7 @@
     <MESSAGE value="Changed API URL" />
     <MESSAGE value="Changed Styles" />
     <MESSAGE value="Redesigned Forms" />
-    <option name="LAST_COMMIT_MESSAGE" value="Redesigned Forms" />
+    <MESSAGE value="Removed Loading Placeholders on forms" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed Loading Placeholders on forms" />
   </component>
 </project>
