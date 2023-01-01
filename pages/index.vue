@@ -338,4 +338,6 @@ export default {
       @apply text-white grid grid-cols-7 text-center bg-neutral-800 my-2 py-3 rounded-full
     .working
       @apply text-green-500
+
+
 </style>

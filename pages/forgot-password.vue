@@ -1,10 +1,10 @@
 <template>
   <div class="fixed left-0 right-0 spotlight z-10"></div>
   <div class="auth-page">
-    <div class="auth-container animate-fadescale">
-      <h1 class="auth-title">Forgot Password</h1>
+    <div class="auth-container">
+      <h1 class="title">Forgot Password</h1>
       <ClientOnly >
-        <form class="auth-form">
+        <form class="form-wrapper">
           <TextField
               name="mail"
               type="email"
@@ -22,18 +22,18 @@
           />
         </form>
       </ClientOnly>
-      <button class="auth-btn-submit" @click="handleRequest">
+      <button class="btn-submit" @click="handleRequest">
         Send Request
       </button>
-      <div class="auth-link-wrapper mt-2">
-        <NuxtLink to="/login" class="auth-link success"
+      <div class="link-wrapper">
+        <NuxtLink to="/login" class="link success"
         >Already have an account? Login</NuxtLink>
       </div>
       <div
           v-show="notification !== false"
           class="notification-wrapper"
       >
-        <div v-if="notification === 'loading'" class="notification loading animate-fadescale">
+        <div v-if="notification === 'loading'" class="notification loading">
           <span class="pt-1"
           ><i class="fa-duotone fa-spinner-third fa-spin"
           /></span>
@@ -130,62 +130,4 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.auth-page
-  @apply text-center mx-auto h-screen flex items-center justify-center
-.auth-container
-  @apply min-w-min px-14 bg-white bg-opacity-5 py-4 z-20
-  .auth-title
-    @apply text-4xl text-opacity-80 text-white
-.auth-form
-  @apply my-4
-.auth-btn-submit
-  @apply gradient-border py-2.5 text-xl text-white text-opacity-80 max-w-xs w-full cursor-pointer
-.auth-link-wrapper .auth-link
-  @apply m-2 text-xs text-white text-opacity-75 transition-all ease-in-out duration-300
-  &.success:hover
-    @apply text-green-500
-  &.error:hover
-    @apply text-red-500
-.notification
-  &.loading
-    @apply bg-yellow-500
-    box-shadow: 0 2px 15px 0 #EAB308
-  &.success
-    @apply bg-green-500
-    box-shadow: 0 2px 15px 0 #22C55E
-  &.error
-    @apply bg-red-500
-    box-shadow: 0 2px 15px 0 #EF4444
-  @apply rounded-full bg-white gap-3 flex-row flex px-4 py-2 place-items-center
-.spotlight
-  background: linear-gradient(45deg, #00dc82 0%, #36e4da 50%, #0047e1 100%)
-  height: 40vh
-  bottom: -30vh
-  @apply blur-[20vh]
-.gradient-border
-  -webkit-backdrop-filter: blur(10px)
-  backdrop-filter: blur(10px)
-  @apply relative
-.gradient-border
-  background-color: rgba(20, 20, 20, 0.3)
-.gradient-border::before
-  background: linear-gradient(90deg,#303030 0%,#303030 25%,#00dc82 50%,#36e4da 75%,#0047e1 100%)
-.gradient-border::before
-  content: ""
-  position: absolute
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  padding: 2px
-  width: 100%
-  background-size: 400% auto
-  opacity: 0.5
-  transition: background-position 0.4s ease-in-out, opacity 0.5s ease-in-out
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
-  -webkit-mask-composite: xor
-  mask-composite: exclude
-.gradient-border:hover::before
-  background-position: -50% 0
-  opacity: 1
 </style>
