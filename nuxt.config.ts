@@ -9,8 +9,8 @@ export default defineNuxtConfig({
     app: {
         baseURL: "",
         head: {
-            script: [
-                { src: 'https://fastdl.l03.dev/js/fontawesome.js', async: true, defer: true}
+            link: [
+                { href: 'https://fastdl.l03.dev/js/fontawesome.js', as: "script", crossorigin: "", rel: "preload" }
             ]
         },
 
