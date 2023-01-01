@@ -1,14 +1,14 @@
 <template>
   <div class="fixed left-0 right-0 spotlight z-10"></div>
-  <div class="auth-page animate-fadescale">
+  <div class="auth-page">
     <div class="auth-container">
-      <h1 class="auth-title">Login</h1>
-      <h3 class="auth-subtitle">Get an all new experience</h3>
+      <h1 class="title">Login</h1>
+      <h3 class="subtitle">Get an all new experience</h3>
       <ClientOnly>
         <template #fallback>
           <p>Loading...</p>
         </template>
-        <form class="auth-form-wrapper">
+        <form class="form-wrapper">
           <TextField
               name="username"
               prepend="fa-solid fa-signature"
@@ -38,15 +38,14 @@
               @field:input="device = $event"
           />
         </form>
-        <button class="auth-btn-submit" @click="handleLogin($event)">
+        <button class="btn-submit" @click="handleLogin($event)">
           Sign In
         </button>
-
-        <div class="auth-link-wrapper">
-          <NuxtLink to="/create-account" class="auth-link success">Create account</NuxtLink>
-          <NuxtLink to="/forgot-password" class="auth-link error">Forgot Password?</NuxtLink>
+        <div class="link-wrapper">
+          <NuxtLink to="/create-account" class="link success">Create account</NuxtLink>
+          <NuxtLink to="/forgot-password" class="link error">Forgot Password?</NuxtLink>
         </div>
-        <div v-show="notification !== false" v-motion-pop-visible class="notification-wrapper">
+        <div v-show="notification !== false" class="notification-wrapper">
           <div v-if="notification === 'loading'" class="notification loading">
             <span class="pt-1">
               <i class="fa-duotone fa-spinner-third fa-spin"/>
@@ -83,9 +82,6 @@ export default {
       v$: useVuelidate()
     }
   },
-  created() {
-
-  },
   data() {
     return {
       password: "",
@@ -94,8 +90,6 @@ export default {
       showPassword: false,
       notification: false,
       notificationMessage: "",
-
-      notificationThread: false,
     };
   },
   validations() {
@@ -139,7 +133,7 @@ export default {
           password: this.password,
         })
         this.notification = "loading";
-        document.querySelector('.auth-btn-submit').disabled = true;
+        document.querySelector('.auth-container .btn-submit').disabled = true;
         res.then((response) => {
           const { jwt, user } = response.data;
           let futureDate = new Date();
@@ -151,8 +145,8 @@ export default {
           console.log("Nuxt | 3. Login successfully;", jwt);
           setTimeout(() => {
             this.$router.push("/");
-            document.querySelector('.auth-btn-submit').disabled = false;
-          }, 3000);
+            document.querySelector('.auth-container .btn-submit').disabled = false;
+          }, 2500);
         });
         res.catch((response) => {
           console.log("Nuxt | 3. Login failed;", response);
@@ -160,7 +154,7 @@ export default {
           this.notificationMessage = response.response.data.error.message;
           setTimeout(() => {
             this.notification = false;
-            document.querySelector('.auth-btn-submit').disabled = false;
+            document.querySelector('.auth-container .btn-submit').disabled = false;
           }, 3000);
         });
       }
@@ -173,38 +167,42 @@ export default {
 .auth-page
   @apply text-center mx-auto h-screen max-h-screen flex items-center justify-center
   .auth-container
-    @apply min-w-min px-14 bg-white bg-opacity-5 py-4 z-20
-    .auth-title
+    @apply min-w-min px-14 bg-white bg-opacity-5 py-4 z-20 animate-fadescale
+    .title
       @apply text-4xl text-opacity-80 text-white
-    .auth-subtitle
+    .subtitle
       @apply text-lg text-opacity-50 text-white
-    .auth-form-wrapper
+    .form-wrapper
       @apply my-4
-    .auth-btn-submit
+    .btn-submit
       @apply gradient-border py-2.5 text-xl text-white text-opacity-80 max-w-xs w-full cursor-pointer
-    .auth-link-wrapper .auth-link
-      @apply m-2 text-xs text-white text-opacity-75 transition-all ease-in-out duration-300
-      &.success:hover
-        @apply text-green-500
-      &.error:hover
-        @apply text-red-500
-    .notification-wrapper .notification
-      @apply rounded-full bg-white gap-3 flex-row flex px-4 pb-1.5 pt-2 place-items-center mt-4
-      &.loading
-        @apply bg-yellow-500
-        box-shadow: 0 2px 15px 0 #EAB308
-      &.success
-        @apply bg-green-500
-        box-shadow: 0 2px 15px 0 #22C55E
-      &.error
-        @apply bg-red-500
-        box-shadow: 0 2px 15px 0 #EF4444
+    .link-wrapper
+      @apply mt-2
+      .link
+        @apply m-2 text-xs text-white text-opacity-75 transition-all ease-in-out duration-300
+        &.success:hover
+          @apply text-green-500
+        &.error:hover
+          @apply text-red-500
+    .notification-wrapper
+      @apply animate-fadescale
+      .notification
+        @apply rounded-full bg-white gap-3 flex-row flex px-4 pb-1.5 pt-2 place-items-center mt-4
+        &.loading
+          @apply bg-yellow-500
+          box-shadow: 0 2px 15px 0 #EAB308
+        &.success
+          @apply bg-green-500
+          box-shadow: 0 2px 15px 0 #22C55E
+        &.error
+          @apply bg-red-500
+          box-shadow: 0 2px 15px 0 #EF4444
 
 .spotlight
   background: linear-gradient(45deg, #00dc82 0%, #36e4da 50%, #0047e1 100%)
-  filter: blur(20vh)
   height: 40vh
   bottom: -30vh
+  @apply blur-[20vh]
 .gradient-border
   -webkit-backdrop-filter: blur(10px)
   backdrop-filter: blur(10px)
