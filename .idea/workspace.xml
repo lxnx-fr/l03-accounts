@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/CheckboxField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/CheckboxField.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/TextField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/TextField.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nuxt.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nuxt.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +99,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -143,8 +142,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.generate" />
         <item itemvalue="npm.postinstall" />
       </list>
@@ -295,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672615274116</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Removed aria-label and added meta description">
+      <created>1672616249682</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1672616249682</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,6 +320,7 @@
     <MESSAGE value="Updates nuxt.config.ts" />
     <MESSAGE value="Added meta and lang attribute" />
     <MESSAGE value="Changed html-meta and added Form labels" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed html-meta and added Form labels" />
+    <MESSAGE value="Removed aria-label and added meta description" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed aria-label and added meta description" />
   </component>
 </project>

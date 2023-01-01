@@ -11,7 +11,7 @@
     </div>
     <div class="field-box">
       <input
-          :id="'tf__' + name"
+          :id="'textfield__' + name"
         ref="fieldInput"
         :type="type"
         class="field-input"
@@ -20,7 +20,7 @@
         @input="handleInput"
         @blur="handleInput"
       />
-      <label class="field-label" :for="'tf__' + name" >{{ label }}<span v-if="labelAddon !== null">{{ labelAddon }}</span></label>
+      <label class="field-label" :for="'textfield__' + name" >{{ label }}<span v-if="labelAddon !== null">{{ labelAddon }}</span></label>
       <div class="field-line" />
       <div
         v-if="append !== null"
