@@ -3,10 +3,6 @@
     <NuxtPage />
   </div>
 </template>
-<script>
-export default {
-}
-</script>
 <style lang="sass">
 @font-face
   font-family: 'NexaLight'
@@ -75,7 +71,6 @@ body, html, #app
   background: linear-gradient(90deg,#303030 0%,#303030 25%,#00dc82 50%,#36e4da 75%,#0047e1 100%)
 .gradient-border::before
   @apply content-[''] absolute top-0 left-0 right-0 bottom-0 w-full opacity-50 p-[2px]
-  padding: 2px
   background-size: 400% auto
   transition: background-position 0.4s ease-in-out, opacity 0.5s ease-in-out
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
