@@ -1,9 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+
     modules: [
         '@nuxtjs/robots',
         '@nuxtjs/tailwindcss',
+        'nuxt-purgecss',
     ],
+    ssr: false,
     app: {
         baseURL: "",
         head: {
@@ -21,4 +24,5 @@ export default defineNuxtConfig({
         },
 
     },
+
 })

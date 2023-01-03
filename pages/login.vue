@@ -153,7 +153,7 @@ export default {
   },
 };
 </script>
-<style lang="sass">
+<style lang="sass" scoped>
 .gradient-border
   -webkit-backdrop-filter: blur(10px)
   backdrop-filter: blur(10px)
