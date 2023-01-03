@@ -1,5 +1,4 @@
 <template>
-  <div class="fixed left-0 right-0 spotlight z-10"></div>
   <div class="auth-page">
     <div class="auth-container">
       <h1 class="title">Register</h1>
@@ -10,8 +9,8 @@
               name="full-name"
               label="Full Name"
               label-addon=" (Optional)"
-              label-color="rgba(255,255,255,0.8)"
-              icon-color="rgba(255,255,255,0.95)"
+              label-color="#FFFFFF7F"
+              icon-color="#FFFFFFE5"
               prepend="fa-solid fa-user"
               @field:input="fullName = $event;"
           />
@@ -19,16 +18,16 @@
               name="username"
               label="Username"
               prepend="fa-solid fa-signature"
-              label-color="rgba(255,255,255,0.8)"
-              icon-color="rgba(255,255,255,0.95)"
+              label-color="#FFFFFF7F"
+              icon-color="#FFFFFFE5"
               :error="v$.username.$errors.length > 0 ? v$.username.$errors[0].$message : null"
               @field:input="username = $event; v$.username.$touch();"
           />
           <TextField
               name="email"
               label="E-Mail"
-              label-color="rgba(255,255,255,0.8)"
-              icon-color="rgba(255,255,255,0.95)"
+              label-color="#FFFFFF7F"
+              icon-color="#FFFFFFE5"
               type="email"
               prepend="fa-solid fa-envelope"
               :error="v$.mail.$errors.length > 0 ? v$.mail.$errors[0].$message : null"
@@ -36,8 +35,8 @@
           />
           <TextField
               name="password"
-              label-color="rgba(255,255,255,0.8)"
-              icon-color="rgba(255,255,255,0.95)"
+              label-color="#FFFFFF7F"
+              icon-color="#FFFFFFE5"
               :type="showPassword ? 'text' : 'password'"
               prepend="fa-solid fa-lock"
               :append="showPassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
@@ -49,8 +48,8 @@
           <TextField
               name="confirm-password"
               :type="showPassword ? 'text' : 'password'"
-              label-color="rgba(255,255,255,0.8)"
-              icon-color="rgba(255,255,255,0.95)"
+              label-color="#FFFFFF7F"
+              icon-color="#FFFFFFE5"
               prepend="fa-solid fa-lock"
               :append="showPassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
               label="Confirm Password"
@@ -59,8 +58,8 @@
               @click:append="showPassword = !showPassword"
           />
           <CheckboxField
-              label-color="rgba(255,255,255,0.8)"
-              icon-color="rgba(255,255,255,0.95)"
+              label-color="#FFFFFFD9"
+              icon-color="#FFFFFFE5"
               name="terms"
               label="Accept Terms of Services"
               :error="v$.termsBox.$errors.length > 0 ? v$.termsBox.$errors[0].$message : null"
@@ -76,26 +75,17 @@
           Already have an account? Login
         </NuxtLink>
       </div>
-      <div
-          v-show="notification !== false"
-          class="notification-wrapper"
-      >
+      <div v-show="notification !== false" class="notification-wrapper">
         <div v-if="notification === 'loading'" class="notification loading">
-          <span class="pt-1">
-            <i class="fa-duotone fa-spinner-third fa-spin"/>
-          </span>
+          <span class="pt-1"><i class="fa-duotone fa-spinner-third fa-spin"/></span>
           <span>Loading...</span>
         </div>
         <div v-else-if="notification === 'success'" class="notification success">
-          <span>
-            <i class="fa-light fa-cloud-check" />
-          </span>
+          <span><i class="fa-light fa-cloud-check" /></span>
           <span>Created account, {{ notificationMessage }}!</span>
         </div>
         <div v-else-if="notification === 'error'" class="notification error">
-          <span>
-            <i class="fa-light fa-circle-exclamation fa-beat-fade" />
-          </span>
+          <span><i class="fa-light fa-circle-exclamation fa-beat-fade" /></span>
           <span>{{ notificationMessage }}</span>
         </div>
       </div>
@@ -225,4 +215,54 @@ export default {
   },
 };
 </script>
+<style lang="sass">
+.gradient-border
+  -webkit-backdrop-filter: blur(10px)
+  backdrop-filter: blur(10px)
+  @apply relative bg-[rgba(20,20,20,0.3)]
+  &::before
+    background: linear-gradient(90deg,#303030 0%,#303030 25%,#00dc82 50%,#36e4da 75%,#0047e1 100%)
+    background-size: 400% auto
+    transition: background-position 0.3s ease-in-out, opacity 0.2s ease-in-out
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
+    -webkit-mask-composite: xor
+    mask-composite: exclude
+    @apply absolute content-[''] top-0 left-0 right-0 bottom-0 p-[2px] w-full opacity-50
+  &:hover::before
+    background-position: -50% 0
+    opacity: 1
+.auth-page
+  @apply text-center mx-auto h-screen max-h-screen flex items-center justify-center
+  .auth-container
+    @apply min-w-min px-14 bg-white bg-opacity-5 py-4 z-20 animate-fadescale
+    .title
+      @apply text-4xl text-opacity-80 text-white
+    .subtitle
+      @apply text-lg text-opacity-50 text-white
+    .form-wrapper
+      @apply my-4
+    .btn-submit
+      @apply py-2.5 text-xl text-white text-opacity-80 max-w-xs w-full cursor-pointer gradient-border
+    .link-wrapper
+      @apply mt-2
+      .link
+        @apply m-2 text-xs text-white text-opacity-75 transition-all ease-in-out duration-300
+        &.success:hover
+          @apply text-green-500
+        &.error:hover
+          @apply text-red-500
+    .notification-wrapper
+      @apply animate-fadescale
+      .notification
+        @apply rounded-full bg-white gap-3 flex-row flex px-4 pb-1.5 pt-2 place-items-center mt-4
+        &.loading
+          @apply bg-yellow-500
+          box-shadow: 0 2px 15px 0 #EAB308
+        &.success
+          @apply bg-green-500
+          box-shadow: 0 2px 15px 0 #22C55E
+        &.error
+          @apply bg-red-500
+          box-shadow: 0 2px 15px 0 #EF4444
+</style>
 

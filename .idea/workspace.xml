@@ -4,9 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f298326b-1b91-4fc7-9a58-3b0295dfb3dd" name="Changes" comment="Fixed minimal issues">
+    <list default="true" id="f298326b-1b91-4fc7-9a58-3b0295dfb3dd" name="Changes" comment="Updated app.vue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nuxt.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nuxt.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/create-account.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/create-account.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/forgot-password.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forgot-password.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/reset-password/[code].vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/reset-password/[code].vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,10 +24,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="Sass File" />
         <option value="Vue Single File Component" />
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -80,7 +88,7 @@
     &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/laurinfrank/Library/Application Support/JetBrains/Toolbox/apps/WebStorm/ch-0/223.8214.51/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -166,6 +174,8 @@
       <workItem from="1672422428851" duration="7541000" />
       <workItem from="1672444025077" duration="4904000" />
       <workItem from="1672467343597" duration="14827000" />
+      <workItem from="1672634567554" duration="4177000" />
+      <workItem from="1672644065881" duration="8707000" />
     </task>
     <task id="LOCAL-00001" summary="Updated">
       <created>1672345526553</created>
@@ -314,7 +324,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672619047347</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Updated app.vue">
+      <created>1672623736774</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1672623736774</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,6 +352,7 @@
     <MESSAGE value="Changed html-meta and added Form labels" />
     <MESSAGE value="Removed aria-label and added meta description" />
     <MESSAGE value="Fixed minimal issues" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed minimal issues" />
+    <MESSAGE value="Updated app.vue" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated app.vue" />
   </component>
 </project>

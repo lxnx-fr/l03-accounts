@@ -1,5 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+    modules: [
+        '@nuxtjs/robots',
+        '@nuxtjs/tailwindcss',
+    ],
     app: {
         baseURL: "",
         head: {
@@ -17,8 +21,4 @@ export default defineNuxtConfig({
         },
 
     },
-    modules: [
-        '@nuxtjs/robots',
-        '@nuxtjs/tailwindcss',
-    ],
 })

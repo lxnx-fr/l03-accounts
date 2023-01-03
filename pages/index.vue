@@ -1,7 +1,6 @@
 <template>
-  <div class="fixed left-0 right-0 spotlight z-10"></div>
   <div v-if="user" class="dashboard-page">
-    <a class="back-home-btn gradient-border cursor-pointer animate-fadescale" @click="handleLogout">
+    <a class="back-home-btn gradient-border" @click="handleLogout">
       Logout
     </a>
     <div class="statistics-container animate-fadescale">
@@ -125,7 +124,6 @@
 <script>
 import {apiURL, getData, loginState, removeData} from "/assets/js/auth";
 import axios from "axios";
-
 export default {
   name: "index",
   data() {
@@ -141,21 +139,20 @@ export default {
     };
   },
   mounted() {
-
     if (loginState()) {
       console.log("Nuxt | Try Retrieving data from local user");
       this.loadAvatar();
       this.loadUserData();
       this.loadWebsites();
     } else {
-      this.$router.push({ path: "/login"});
+      this.$router.push('/login');
     }
   },
   methods: {
     handleLogout() {
       this.user = null;
       removeData("user.token")
-      this.$router.push({ path: "/login/"});
+      this.$router.push('/login');
     },
     handleEdit() {
       this.editing = !this.editing;
@@ -211,7 +208,22 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
+.gradient-border
+  -webkit-backdrop-filter: blur(10px)
+  backdrop-filter: blur(10px)
+  @apply relative bg-[rgba(20,20,20,0.3)]
+  &::before
+    background: linear-gradient(90deg,#303030 0%,#303030 25%,#00dc82 50%,#36e4da 75%,#0047e1 100%)
+    background-size: 400% auto
+    transition: background-position 0.3s ease-in-out, opacity 0.2s ease-in-out
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
+    -webkit-mask-composite: xor
+    mask-composite: exclude
+    @apply absolute content-[''] top-0 left-0 right-0 bottom-0 p-[2px] w-full opacity-50
+  &:hover::before
+    background-position: -50% 0
+    opacity: 1
 .dashboard-loading-page
   @apply text-center mx-auto h-screen flex items-center justify-center flex-col gap-6 font-sans
 .dashboard-loading-container
@@ -221,89 +233,21 @@ export default {
     @apply text-3xl md:text-4xl pt-6
   h2
     @apply text-sm md:text-sm
-.spotlight
-  background: linear-gradient(45deg, #00dc82 0%, #36e4da 50%, #0047e1 100%)
-  filter: blur(20vh)
-  height: 40vh
-  bottom: -30vh
-
-.gradient-border
-  -webkit-backdrop-filter: blur(10px)
-  backdrop-filter: blur(10px)
-  @apply relative
-.gradient-border
-  background-color: rgba(20, 20, 20, 0.3)
-.gradient-border::before
-  background: linear-gradient(90deg,#303030 0%,#303030 25%,#00dc82 50%,#36e4da 75%,#0047e1 100%)
-.gradient-border::before
-  content: ""
-  position: absolute
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  padding: 2px
-  width: 100%
-  background-size: 400% auto
-  opacity: 0.5
-  transition: background-position 0.3s ease-in-out, opacity 0.2s ease-in-out
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
-  -webkit-mask-composite: xor
-  mask-composite: exclude
-.gradient-border:hover::before
-  background-position: -50% 0
-  opacity: 1
 .dashboard-page
   @apply text-center mx-auto h-screen font-sans grid grid-cols-2 place-items-center p-8
   img
     @apply aspect-auto max-w-xs md:max-w-sm
 .statistics-container
-  @apply grid grid-cols-2 place-items-center max-w-md md:max-w-lg w-full bg-white bg-opacity-5 px-8 py-4 text-white text-opacity-80 z-20 gap-4
+  @apply  grid grid-cols-2 place-items-center max-w-md md:max-w-lg w-full bg-white bg-opacity-5 px-8 py-4 text-white text-opacity-80 z-20 gap-4
   h1
     @apply text-2xl md:text-4xl py-4 col-span-2
   h2
     @apply text-sm md:text-sm
   .statistic-box
-    @apply gradient-border text-xl py-5 px-2 cursor-pointer max-w-xs w-full
+    @apply text-xl py-5 px-2 cursor-pointer max-w-xs w-full gradient-border
 
 .back-home-btn
-  @apply absolute top-2 left-4 md:left-10 md:top-8 text-white text-lg font-sans px-4 py-2 flex
-.profile-container
-  @apply grid grid-cols-1 place-items-center max-w-sm md:max-w-md w-full bg-white bg-opacity-5 px-8 py-4 text-white text-opacity-80 z-20
-  .btn-edit
-    @apply bg-black text-white absolute  top-0 w-fit h-fit rounded-full px-3 py-1 m-2 select-none transition-all duration-300 ease-in-out
-    &:hover
-      box-shadow: 0 2px 20px 0 #5A2BE1
-      @apply bg-violet-700 text-white
-  &.editing
-    img, .details-name
-      &:hover
-        @apply border-4 border-violet-700 border-dashed
-
-  .details-wrapper
-    @apply w-full text-3xl col-span-full flex items-center flex-col mt-5
-    a
-      @apply text-sm text-left
-      &:hover
-        @apply relative inline-block transition-all duration-200 ease-in-out
-      &:after
-        @apply w-full absolute bottom-0 left-0 transition-transform duration-200 ease-in-out content-[''] scale-x-0 h-[2px] bg-black origin-bottom-right
-      &:hover:after
-        @apply scale-x-100 origin-bottom-left
-  .avatar-wrapper
-    @apply col-span-full flex justify-center
-    img
-      @apply rounded-md w-48 rounded-full aspect-square transition-transform duration-300 ease-in-out
-  .editing-btn-wrapper
-    @apply w-full col-span-full grid grid-cols-2 place-items-center gap-6 mt-5
-    button
-      @apply bg-black text-white w-full h-fit rounded-full px-3 py-1 m-2 select-none transition-all duration-300 ease-in-out
-      &.error:hover
-        box-shadow: 0 2px 20px 0 #EF4444
-        @apply bg-red-500 text-white
-      &.success:hover
-        box-shadow: 0 2px 20px 0 #22C55E
-        @apply bg-green-500 text-white
+  @apply cursor-pointer animate-fadescale absolute top-2 left-4 md:left-10 md:top-8 text-white text-lg font-sans px-4 py-2 flex
 .websites-container
   @apply bg-orange-400 duration-300 transition-all ease-in-out rounded-lg
   @apply p-4 grid grid-cols-4 col-span-full justify-start items-center relative w-full gap-4 overflow-hidden

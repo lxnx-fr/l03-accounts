@@ -1,5 +1,4 @@
 <template>
-  <div class="fixed left-0 right-0 spotlight z-10"></div>
   <div class="auth-page">
     <div class="auth-container">
       <h1 class="title">Reset Password</h1>
