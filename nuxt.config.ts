@@ -5,7 +5,6 @@ export default defineNuxtConfig({
         '@nuxtjs/robots',
         '@nuxtjs/tailwindcss',
     ],
-    ssr: false,
     app: {
         baseURL: "",
         head: {
