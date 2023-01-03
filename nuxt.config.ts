@@ -4,7 +4,6 @@ export default defineNuxtConfig({
     modules: [
         '@nuxtjs/robots',
         '@nuxtjs/tailwindcss',
-        'nuxt-purgecss',
     ],
     ssr: false,
     app: {
