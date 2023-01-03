@@ -5,7 +5,7 @@ export default defineNuxtConfig({
         '@nuxtjs/robots',
         '@nuxtjs/tailwindcss',
     ],
-    ssr: false,
+    ssr: true,
     app: {
         baseURL: "",
         head: {
@@ -19,7 +19,7 @@ export default defineNuxtConfig({
             ],
             title: 'Accounts | lxms',
             script: [
-                { src: 'https://fastdl.l03.dev/js/fontawesome.js', defer: true, async: true, tagPosition: "bodyClose" }
+                { src: 'https://fastdl.l03.dev/js/fontawesome.js', defer: true, tagPosition: "bodyClose" }
             ]
         },
 
