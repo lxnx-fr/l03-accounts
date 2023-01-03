@@ -1,6 +1,6 @@
 {
   "private": true,
-  "license": "MIT",
+  "license": "GPL",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
