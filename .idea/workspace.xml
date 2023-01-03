@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f298326b-1b91-4fc7-9a58-3b0295dfb3dd" name="Changes" comment="" />
+    <list default="true" id="f298326b-1b91-4fc7-9a58-3b0295dfb3dd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pages/create-account.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/forgot-password.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nuxt.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nuxt.config.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,7 +74,7 @@
     "WebServerToolWindowPanel.toolwindow.show.date": "false",
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "last_opened_file_path": "/Users/laurinfrank/MEGAsync/coding/web/experimental",
+    "last_opened_file_path": "/Users/laurinfrank/MEGAsync/coding/web/experimental/pages",
     "list.type.of.created.stylesheet": "Sass",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -84,13 +89,14 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/pages" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/plugins" />
       <recent name="$PROJECT_DIR$/assets/fonts/NexaLight" />
       <recent name="$PROJECT_DIR$/assets/fonts/NexaBold" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/dist" />
       <recent name="$PROJECT_DIR$/pages/reset-password" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -164,7 +170,7 @@
       <workItem from="1672444025077" duration="4904000" />
       <workItem from="1672467343597" duration="14827000" />
       <workItem from="1672634567554" duration="4177000" />
-      <workItem from="1672644065881" duration="20221000" />
+      <workItem from="1672644065881" duration="21675000" />
     </task>
     <task id="LOCAL-00001" summary="Updated">
       <created>1672345526553</created>
@@ -390,7 +396,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672729394916</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Updated">
+      <created>1672729907933</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1672729907933</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,9 +426,9 @@
     <MESSAGE value="Updated app.vue" />
     <MESSAGE value="Changed CSS" />
     <MESSAGE value="Removed nuxt-purgecss dependency" />
-    <MESSAGE value="Updated" />
     <MESSAGE value="Added Custom error page" />
     <MESSAGE value="Changed loading state for fontawesome" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed loading state for fontawesome" />
+    <MESSAGE value="Updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated" />
   </component>
 </project>
