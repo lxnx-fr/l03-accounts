@@ -5,10 +5,6 @@ export default defineNuxtConfig({
         '@nuxtjs/robots',
         '@nuxtjs/tailwindcss',
     ],
-    nitro: {
-        minify: true
-
-    },
     app: {
         baseURL: "",
         head: {
