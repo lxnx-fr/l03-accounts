@@ -19,7 +19,7 @@ export default defineNuxtConfig({
             ],
             title: 'Accounts | lxms',
             script: [
-                { src: 'https://fastdl.l03.dev/js/fontawesome.js', defer: true}
+                { src: 'https://fastdl.l03.dev/js/fontawesome.js', defer: true, tagPosition: 'bodyClose'}
             ]
         },
 
