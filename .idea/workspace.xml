@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f298326b-1b91-4fc7-9a58-3b0295dfb3dd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/composables/useAuth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/kit.client.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/CheckboxField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/CheckboxField.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/TextField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/TextField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/UploadField.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/create-account.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/create-account.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/forgot-password.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forgot-password.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/reset-password/[code].vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/reset-password/[code].vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -190,7 +184,7 @@
       <workItem from="1672644065881" duration="24217000" />
       <workItem from="1672799293764" duration="8429000" />
       <workItem from="1672848548614" duration="22858000" />
-      <workItem from="1672961191567" duration="3187000" />
+      <workItem from="1672961191567" duration="4288000" />
     </task>
     <task id="LOCAL-00001" summary="Updated">
       <created>1672345526553</created>
@@ -437,7 +431,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672848305492</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="using now vue composition api">
+      <created>1672966945512</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1672966945512</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -463,6 +464,7 @@
     <MESSAGE value="Added Custom error page" />
     <MESSAGE value="Changed loading state for fontawesome" />
     <MESSAGE value="Updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated" />
+    <MESSAGE value="using now vue composition api" />
+    <option name="LAST_COMMIT_MESSAGE" value="using now vue composition api" />
   </component>
 </project>

@@ -2,7 +2,6 @@
 import useVuelidate from "@vuelidate/core";
 import {required, helpers, minLength, maxLength, sameAs} from "@vuelidate/validators";
 import axios from "axios";
-import {apiURL} from "~/composables/useAuth";
 
 const router = useRouter();
 
@@ -31,10 +30,14 @@ const rules = {
   },
   confirmPassword: {
     required: helpers.withMessage("Confirm Password is required.", required),
-    sameAs: helpers.withMessage("Passwords must match", sameAs(state.password)),
+    sameAs: helpers.withMessage("Passwords must match", samePassword),
   },
 }
 const v$ = useVuelidate(rules, state);
+
+function samePassword() {
+  return state.password === state.confirmPassword;
+}
 
 async function handleRequest() {
   this.v$.$touch();
@@ -43,7 +46,7 @@ async function handleRequest() {
   if (!this.v$.$invalid) {
     console.log("DEV-LOG | 2. Form Validation successfully");
     const res = axios.post(apiURL() + "api/auth/reset-password", {
-      code: this.$route.params.code,
+      code: router.params.code,
       password: state.password,
       passwordConfirmation: state.confirmPassword,
     });

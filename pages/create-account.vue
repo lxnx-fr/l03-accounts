@@ -50,7 +50,7 @@ const rules = {
   },
   confirmPassword: {
     required: helpers.withMessage("Confirm Password is required.", required),
-    sameAs: helpers.withMessage("Passwords must match", sameAs(state.password)),
+    sameAs: helpers.withMessage("Passwords must match", samePassword),
   },
   termsBox: {
     checked: helpers.withMessage(
@@ -63,6 +63,9 @@ const rules = {
 const v$ = useVuelidate(rules, state);
 function isChecked() {
   return state.termsBox === true;
+}
+function samePassword() {
+  return state.password === state.confirmPassword;
 }
 
 async function handleRegister() {
