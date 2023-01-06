@@ -1,18 +1,15 @@
-<script setup>
+<script setup lang="ts">
 import axios from "axios";
 import { helpers, maxLength, minLength, required } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 
 const router = useRouter();
-onMounted(() => {
-  if (loginState()) router.push('/');
-})
 const state = reactive({
   password: '',
   username: '',
   device: false,
   showPassword: false,
-  notification: false
+  notification: {}
 })
 const rules = {
   password: {
@@ -39,17 +36,20 @@ const rules = {
   }
 }
 const v$ = useVuelidate(rules, state);
-async function handleLogin(event) {
+onMounted(() => {
+  if (loginState()) router.push('/');
+})
+async function handleLogin(event: any) {
   v$.value.$touch();
-  const submitBtn = document.querySelector('.auth-container .btn-submit')
+  const submitBtn: HTMLButtonElement = document.querySelector('.auth-container .btn-submit') as HTMLButtonElement;
   if (!v$.value.$invalid) {
-    const res = axios.post(apiURL() + "api/auth/local", {
+    const res = axios.post(apiURL + "api/auth/local", {
       identifier: state.username,
       password: state.password,
-    })
+    });
     state.notification = {
       type: "loading"
-    }
+    };
     submitBtn.disabled = true;
     res.then((response) => {
       const { jwt, user } = response.data;
@@ -60,16 +60,17 @@ async function handleLogin(event) {
       state.notification = {
         type: "success",
         message: user.username
-      }
+      };
       setTimeout(() => {
         router.push('/');
-        submitBtn.disabled = false;
       }, 2500);
     });
     res.catch((response) => {
       state.notification = { type: "error", message: response.response.data.error.message };
       setTimeout(() => {
-        state.notification = false;
+        state.notification = {
+          type: false
+        };
         submitBtn.disabled = false;
       }, 3000);
     });

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {HTML} from "stylehacks/types/dictionary/tags";
 
 const props = defineProps({
   label: {

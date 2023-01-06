@@ -1,39 +1,28 @@
+
+<script setup lang="ts">
+defineProps( {
+  error: {}
+})
+</script>
+
 <template>
   <div class="bg-spotlight" />
   <div class="bg-spotlight" />
   <div class="animate-fadescale font-sans antialiased bg-black text-white grid min-h-screen place-content-center overflow-hidden">
     <div class="max-w-520px text-center z-20 ">
-      <div v-if="error.statusCode === 404">
-        <h1 class="text-8xl sm:text-10xl font-medium mb-8" v-text="'404'" />
+        <h1 class="text-8xl sm:text-10xl font-medium mb-8">{{error.statusCode}}</h1>
         <p class="text-xl px-8 sm:px-0 sm:text-4xl font-light mb-16 leading-tight">
-          Page not found: {{ this.url }}
+          Page not found: {{ error.url }}
         </p>
         <div class="w-full flex items-center justify-center">
           <NuxtLink to="/" class="gradient-border text-md sm:text-xl py-2 px-4 sm:py-3 sm:px-6 cursor-pointer">
             Go back Home
           </NuxtLink>
         </div>
-      </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "error",
-  props: [
-      "error"
-  ],
-  data() {
-    return {
-      url: "",
-    };
-  },
-  mounted() {
-    this.url = window.location.pathname;
-  },
-}
-</script>
 
 <style lang="sass" scoped>
 .bg-spotlight

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import useVuelidate from "@vuelidate/core";
 import {required, helpers, minLength, maxLength } from "@vuelidate/validators";
 import axios from "axios";
@@ -15,7 +15,7 @@ const state = reactive({
   password: "",
   confirmPassword: "",
   showPassword: false,
-  notification: false,
+  notification: {},
 })
 const rules = {
   password: {
@@ -37,27 +37,37 @@ function samePassword() {
 async function handleRequest() {
   v$.value.$touch();
   console.log("DEV-LOG | 1. Trying to Reset-Password...");
-  const btnSubmit = document.querySelector('.auth-container .btn-submit');
+  const btnSubmit: HTMLButtonElement = document.querySelector('.auth-container .btn-submit') as HTMLButtonElement;
   if (!v$.value.$invalid) {
     console.log("DEV-LOG | 2. Form Validation successfully");
-    const res = axios.post(apiURL() + "api/auth/reset-password", {
+    const res = axios.post(apiURL + "api/auth/reset-password", {
       code: route.params.code,
       password: state.password,
       passwordConfirmation: state.confirmPassword,
     });
     btnSubmit.disabled = true;
-    state.notification = { type: "loading" };
+    state.notification = {
+      type: "loading"
+    };
     res.then((response) => {
-      state.notification = { type: "success", message: "Your user's password has been reset."};
+      state.notification = {
+        type: "success",
+        message: "Your user's password has been reset."
+      };
       setTimeout(() => {
         state.notification = false;
         btnSubmit.disabled = false;
       }, 2500);
     });
     res.catch((response) => {
-      state.notification = { type: "error", message: response.response.data.error.message }
+      state.notification = {
+        type: "error",
+        message: response.response.data.error.message
+      };
       setTimeout(() => {
-        state.notification = false;
+        state.notification = {
+          type: false,
+        };
         btnSubmit.disabled = false;
       }, 3000);
     });

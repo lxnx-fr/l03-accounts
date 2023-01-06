@@ -1,4 +1,6 @@
-<script setup>
+
+
+<script setup lang="ts">
 import axios from "axios";
 import { helpers, required, email } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
@@ -11,7 +13,7 @@ onMounted(() => {
 })
 const state = reactive({
   mail: '',
-  notification: false,
+  notification: {},
 })
 const rules = {
   mail: {
@@ -20,19 +22,25 @@ const rules = {
   },
 }
 const v$ = useVuelidate(rules, state);
-async function handleRequest(event) {
+async function handleRequest(event: any) {
   v$.value.$touch();
-  const btnSubmit = document.querySelector('.auth-container .btn-submit');
+  const btnSubmit: HTMLButtonElement = document.querySelector('.auth-container .btn-submit') as HTMLButtonElement;
   if (!v$.value.$invalid) {
-    const res = axios.post(apiURL() + "api/auth/forgot-password", {
+    const res = axios.post(apiURL + "api/auth/forgot-password", {
       email: state.mail,
     });
     btnSubmit.disabled = false;
-    state.notification = {type: "loading"};
+    state.notification = {
+      type: "loading"
+    };
     res.then((response) => {
-      state.notification = {type: "success"};
+      state.notification = {
+        type: "success"}
+      ;
       setTimeout(() => {
-        state.notification = false;
+        state.notification = {
+          type: false
+        };
         btnSubmit.disabled = false;
       }, 2500);
     });
@@ -42,7 +50,7 @@ async function handleRequest(event) {
         message: response.response.data.error.message
       };
       setTimeout(() => {
-        state.notification = false;
+        state.notification = {type: false};
         btnSubmit.disabled = false;
       }, 2500);
     });
@@ -78,7 +86,7 @@ async function handleRequest(event) {
         <NuxtLink to="/login" class="link success"
         >Already have an account? Login</NuxtLink>
       </div>
-      <div v-show="state.notification !== false" class="notification-wrapper">
+      <div v-show="state.notification.type !== false" class="notification-wrapper">
         <div v-if="state.notification.type === 'loading'" class="notification loading">
           <span class="pt-1"><i class="fa-duotone fa-spinner-third fa-spin"/></span>
           <span class="">Loading...</span>

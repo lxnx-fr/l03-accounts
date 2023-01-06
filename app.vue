@@ -1,12 +1,8 @@
 <template>
-  <div>
-    <div class="bg-spotlight" />
-    <div class="bg-spotlight" />
-    <NuxtPage />
-  </div>
+  <div class="bg-spotlight" />
+  <div class="bg-spotlight" />
+  <NuxtPage />
 </template>
-<script setup>
-</script>
 <style lang="sass">
 @font-face
   font-family: 'NexaLight'

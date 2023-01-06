@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const apiURL = () => { return "https://strapi.l03.dev/" }
+export const apiURL = "https://strapi.l03.dev/"
 export const loginState = () => {
     const dLoginDate = getData("user.loginDate");
     const dToken = getData("user.token");
@@ -17,12 +17,12 @@ export const loginState = () => {
     }
 };
 
-export const getData = (key) => {
+export const getData = (key: string) => {
     return window.localStorage.getItem(key);
 }
-export const setData = (key, data) => {
+export const setData = (key: string, data: any) => {
     window.localStorage.setItem(key, data);
 }
-export const removeData = (key) => {
+export const removeData = (key: string) => {
     window.localStorage.removeItem(key);
 }

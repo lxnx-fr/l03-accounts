@@ -1,6 +1,6 @@
 
 
-<script setup>
+<script setup lang="ts">
 import axios from "axios";
 
 const router = useRouter();
@@ -22,7 +22,7 @@ onMounted(() => {
   } else router.push('/login');
 })
 function loadWebsites() {
-  const req = axios.get(apiURL() + "api/users/me?populate=msites&fields=id", {
+  const req = axios.get(apiURL + "api/users/me?populate=msites&fields=id", {
     headers: {
       Authorization: "Bearer " + getData("user.token")
     }
@@ -35,7 +35,7 @@ function loadWebsites() {
   });
 }
 function loadAvatar() {
-  const req = axios.get(apiURL() + "api/users/me?populate=avatar", {
+  const req = axios.get(apiURL + "api/users/me?populate=avatar", {
     headers: {
       Authorization: "Bearer " + getData("user.token")
     }
@@ -48,7 +48,7 @@ function loadAvatar() {
   });
 }
 function loadUserData() {
-  const request = axios.get(apiURL() + "api/users/me", {
+  const request = axios.get(apiURL + "api/users/me", {
     headers: {
       Authorization: "Bearer " + getData("user.token")
     },

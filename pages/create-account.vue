@@ -1,6 +1,6 @@
 
 
-<script setup>
+<script setup lang="ts">
 import useVuelidate from "@vuelidate/core";
 import axios from "axios";
 import { email, helpers, maxLength, minLength, required } from "@vuelidate/validators";
@@ -16,9 +16,9 @@ const state = reactive({
   mail: "",
   password: "",
   confirmPassword: "",
-  termsBox: "",
+  termsBox: false,
   showPassword: false,
-  notification: false,
+  notification: {},
 })
 
 const rules = {
@@ -55,23 +55,27 @@ function samePassword() {
 
 async function handleRegister() {
   v$.value.$touch();
-  const btnSubmit = document.querySelector('.auth-container .btn-submit');
+  const btnSubmit: HTMLButtonElement  = document.querySelector('.auth-container .btn-submit') as HTMLButtonElement;
   if (!v$.value.$invalid) {
-    const res = axios.post(apiURL() + "api/auth/local/register", {
+    const res = axios.post(apiURL + "api/auth/local/register", {
       email: state.mail,
       password: state.password,
       username: state.username,
       fullname: state.fullName,
     });
     btnSubmit.disabled = true;
-    state.notification = "loading";
+    state.notification = {
+      type: "loading"
+    };
     res.then((response) => {
       state.notification = {
         type: "success",
         message: response.data.user.username
       };
       setTimeout(() => {
-        state.notification = false;
+        state.notification = {
+          type: false
+        };
         router.push('/login');
       }, 2500);
     });
@@ -79,9 +83,11 @@ async function handleRegister() {
       state.notification = {
         type: "error",
         message: response.response.data.error.message
-      }
+      };
       setTimeout(() => {
-        state.notification = false;
+        state.notification = {
+          type: false
+        };
         btnSubmit.disabled = false;
       }, 2500);
     });
@@ -165,7 +171,7 @@ async function handleRegister() {
           Already have an account? Login
         </NuxtLink>
       </div>
-      <div v-show="state.notification !== false" class="notification-wrapper">
+      <div v-show="state.notification.type !== false" class="notification-wrapper">
         <div v-if="state.notification.type === 'loading'" class="notification loading">
           <span class="pt-1"><i class="fa-duotone fa-spinner-third fa-spin"/></span>
           <span>Loading...</span>
