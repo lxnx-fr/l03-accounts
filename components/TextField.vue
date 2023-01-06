@@ -80,8 +80,8 @@ watch(() => props.prepend, (newPrepend) => {
         class="field-input"
         :name="name"
         placeholder=" "
-        @input="$emit('field:input', this.$refs.fieldInput.value)"
-        @blur="$emit('field:input', this.$refs.fieldInput.value)"
+        @input="$emit('field:input', $refs.fieldInput.value)"
+        @blur="$emit('field:input', $refs.fieldInput.value)"
       />
       <label class="field-label" :for="'tf__' + name" >
         {{ label }}

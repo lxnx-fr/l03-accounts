@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f298326b-1b91-4fc7-9a58-3b0295dfb3dd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/UploadField.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/CheckboxField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/CheckboxField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/TextField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/TextField.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/create-account.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/create-account.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/forgot-password.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/forgot-password.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/reset-password/[code].vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/reset-password/[code].vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +104,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.build">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -154,8 +157,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.preview" />
         <item itemvalue="npm.postinstall" />
         <item itemvalue="npm.generate" />
@@ -184,7 +187,7 @@
       <workItem from="1672644065881" duration="24217000" />
       <workItem from="1672799293764" duration="8429000" />
       <workItem from="1672848548614" duration="22858000" />
-      <workItem from="1672961191567" duration="4288000" />
+      <workItem from="1672961191567" duration="5842000" />
     </task>
     <task id="LOCAL-00001" summary="Updated">
       <created>1672345526553</created>
@@ -438,7 +441,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672966945512</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="fixed password match">
+      <created>1672967774654</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1672967774654</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -465,6 +475,7 @@
     <MESSAGE value="Changed loading state for fontawesome" />
     <MESSAGE value="Updated" />
     <MESSAGE value="using now vue composition api" />
-    <option name="LAST_COMMIT_MESSAGE" value="using now vue composition api" />
+    <MESSAGE value="fixed password match" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed password match" />
   </component>
 </project>

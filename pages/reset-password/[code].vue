@@ -1,6 +1,6 @@
 <script setup>
 import useVuelidate from "@vuelidate/core";
-import {required, helpers, minLength, maxLength, sameAs} from "@vuelidate/validators";
+import {required, helpers, minLength, maxLength } from "@vuelidate/validators";
 import axios from "axios";
 
 const router = useRouter();
@@ -19,14 +19,8 @@ const state = reactive({
 const rules = {
   password: {
     required: helpers.withMessage("Password is required.", required),
-    minLength: helpers.withMessage(
-        "Password must be 8 or more chars.",
-        minLength(8)
-    ),
-    maxLength: helpers.withMessage(
-        "Password must shorter than 64 chars.",
-        maxLength(64)
-    ),
+    minLength: helpers.withMessage("Password must be 8 or more chars.", minLength(8)),
+    maxLength: helpers.withMessage("Password must shorter than 64 chars.", maxLength(64)),
   },
   confirmPassword: {
     required: helpers.withMessage("Confirm Password is required.", required),
@@ -40,10 +34,10 @@ function samePassword() {
 }
 
 async function handleRequest() {
-  this.v$.$touch();
+  v$.value.$touch();
   console.log("DEV-LOG | 1. Trying to Reset-Password...");
   const btnSubmit = document.querySelector('.auth-container .btn-submit');
-  if (!this.v$.$invalid) {
+  if (!v$.value.$invalid) {
     console.log("DEV-LOG | 2. Form Validation successfully");
     const res = axios.post(apiURL() + "api/auth/reset-password", {
       code: router.params.code,

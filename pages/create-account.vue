@@ -3,7 +3,7 @@
 <script setup>
 import useVuelidate from "@vuelidate/core";
 import axios from "axios";
-import {email, helpers, maxLength, minLength, required, sameAs} from "@vuelidate/validators";
+import { email, helpers, maxLength, minLength, required } from "@vuelidate/validators";
 const router = useRouter();
 
 onMounted(() => {
@@ -24,14 +24,8 @@ const state = reactive({
 const rules = {
   username: {
     required: helpers.withMessage("Username is required.", required),
-    minLength: helpers.withMessage(
-        "Username must 3 or more characters",
-        minLength(3)
-    ),
-    maxLength: helpers.withMessage(
-        "Username must shorter than 20 characters",
-        maxLength(20)
-    ),
+    minLength: helpers.withMessage("Username must 3 or more characters", minLength(3)),
+    maxLength: helpers.withMessage("Username must shorter than 20 characters", maxLength(20)),
   },
   mail: {
     email: helpers.withMessage("Please enter a valid E-Mail.", email),
@@ -39,24 +33,15 @@ const rules = {
   },
   password: {
     required: helpers.withMessage("Password is required.", required),
-    minLength: helpers.withMessage(
-        "Password must be 8 or more chars.",
-        minLength(8)
-    ),
-    maxLength: helpers.withMessage(
-        "Password must shorter than 64 chars.",
-        maxLength(64)
-    ),
+    minLength: helpers.withMessage("Password must be 8 or more chars.", minLength(8)),
+    maxLength: helpers.withMessage("Password must shorter than 64 chars.",  maxLength(64)),
   },
   confirmPassword: {
     required: helpers.withMessage("Confirm Password is required.", required),
     sameAs: helpers.withMessage("Passwords must match", samePassword),
   },
   termsBox: {
-    checked: helpers.withMessage(
-        "You must accept our Terms of Services",
-        isChecked
-    ),
+    checked: helpers.withMessage("You must accept our Terms of Services", isChecked),
   },
 }
 
@@ -69,17 +54,15 @@ function samePassword() {
 }
 
 async function handleRegister() {
-  this.v$.$touch();
+  v$.value.$touch();
   const btnSubmit = document.querySelector('.auth-container .btn-submit');
-  if (!this.v$.$invalid) {
-    const res = axios.post(apiURL() + "api/auth/local/register",
-        {
-          email: state.mail,
-          password: state.password,
-          username: state.username,
-          fullname: state.fullName,
-        }
-    );
+  if (!v$.value.$invalid) {
+    const res = axios.post(apiURL() + "api/auth/local/register", {
+      email: state.mail,
+      password: state.password,
+      username: state.username,
+      fullname: state.fullName,
+    });
     btnSubmit.disabled = true;
     state.notification = "loading";
     res.then((response) => {

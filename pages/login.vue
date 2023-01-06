@@ -40,9 +40,9 @@ const rules = {
 }
 const v$ = useVuelidate(rules, state);
 async function handleLogin(event) {
-  this.v$.$touch();
+  v$.value.$touch();
   const submitBtn = document.querySelector('.auth-container .btn-submit')
-  if (!this.v$.$invalid) {
+  if (!v$.value.$invalid) {
     const res = axios.post(apiURL() + "api/auth/local", {
       identifier: state.username,
       password: state.password,

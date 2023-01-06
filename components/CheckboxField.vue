@@ -31,8 +31,8 @@ defineProps({
         class="field-checkbox"
         :name="name"
         type="checkbox"
-        @input="$emit('field:input', this.$refs.fieldInput.checked)"
-        @blur="$emit('field:input', this.$refs.fieldInput.checked)"
+        @input="$emit('field:input', $refs.fieldInput.checked)"
+        @blur="$emit('field:input', $refs.fieldInput.checked)"
       />
       <label class="field-label" :for="'cbf__' + name">
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">

@@ -21,15 +21,12 @@ const rules = {
 }
 const v$ = useVuelidate(rules, state);
 async function handleRequest(event) {
-  this.v$.$touch();
+  v$.value.$touch();
   const btnSubmit = document.querySelector('.auth-container .btn-submit');
-  if (!this.v$.$invalid) {
-    const res = axios.post(
-        apiURL() + "api/auth/forgot-password",
-        {
-          email: state.mail,
-        }
-    );
+  if (!v$.value.$invalid) {
+    const res = axios.post(apiURL() + "api/auth/forgot-password", {
+      email: state.mail,
+    });
     btnSubmit.disabled = false;
     state.notification = {type: "loading"};
     res.then((response) => {
