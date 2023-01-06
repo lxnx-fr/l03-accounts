@@ -10,10 +10,8 @@ export const loginState = () => {
         if (between <= 10000) {
             removeData("user.token");
             removeData("user.loginDate")
-            console.log("Nuxt | Deleted User Data (Current Date --> Saved Date)");
             return false;
         } else {
-            console.log("Nuxt | User is logged in (Saved Date --> Current Date)");
             return true;
         }
     }
@@ -28,10 +26,3 @@ export const setData = (key, data) => {
 export const removeData = (key) => {
     window.localStorage.removeItem(key);
 }
-export default {
-    apiURL,
-    setData,
-    getData,
-    removeData,
-
-};

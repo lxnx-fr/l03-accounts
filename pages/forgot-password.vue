@@ -1,3 +1,60 @@
+<script setup>
+import axios from "axios";
+import { helpers, required, email } from "@vuelidate/validators";
+import useVuelidate from "@vuelidate/core";
+
+const router = useRouter();
+onMounted(() => {
+  if (loginState()) {
+    router.push('/');
+  }
+})
+const state = reactive({
+  mail: '',
+  notification: false,
+})
+const rules = {
+  mail: {
+    email: helpers.withMessage("Please enter a valid E-Mail.", email),
+    required: helpers.withMessage("E-Mail is required.", required),
+  },
+}
+const v$ = useVuelidate(rules, state);
+async function handleRequest(event) {
+  this.v$.$touch();
+  const btnSubmit = document.querySelector('.auth-container .btn-submit');
+  if (!this.v$.$invalid) {
+    const res = axios.post(
+        apiURL() + "api/auth/forgot-password",
+        {
+          email: state.mail,
+        }
+    );
+    btnSubmit.disabled = false;
+    state.notification = {type: "loading"};
+    res.then((response) => {
+      state.notification = {type: "success"};
+      setTimeout(() => {
+        state.notification = false;
+        btnSubmit.disabled = false;
+      }, 2500);
+    });
+    res.catch((response) => {
+      state.notification = {
+        type: "error",
+        message: response.response.data.error.message
+      };
+      setTimeout(() => {
+        state.notification = false;
+        btnSubmit.disabled = false;
+      }, 2500);
+    });
+  }
+}
+
+// TODO: CLIENT AREA / MULTI PAGE REDIRECTION / client.l03.dev / duplicate project / new sidebar etc. / faster main page
+</script>
+
 <template>
   <div class="auth-page">
     <div class="auth-container">
@@ -13,102 +70,36 @@
               label-color="#FFFFFF7F"
               icon-color="#FFFFFFE5"
               :error="v$.mail.$errors.length > 0 ? v$.mail.$errors[0].$message : null"
-              @field:input="mail = $event; v$.mail.$touch();"
+              @field:input="state.mail = $event; v$.mail.$touch();"
           />
         </form>
       </ClientOnly>
-      <button class="btn-submit" @click="handleRequest">
+      <button class="btn-submit" @click="handleRequest($event)">
         Send Request
       </button>
       <div class="link-wrapper">
         <NuxtLink to="/login" class="link success"
         >Already have an account? Login</NuxtLink>
       </div>
-      <div v-show="notification !== false" class="notification-wrapper">
-        <div v-if="notification === 'loading'" class="notification loading">
+      <div v-show="state.notification !== false" class="notification-wrapper">
+        <div v-if="state.notification.type === 'loading'" class="notification loading">
           <span class="pt-1"><i class="fa-duotone fa-spinner-third fa-spin"/></span>
           <span class="">Loading...</span>
         </div>
-        <div v-else-if="notification === 'success'" class="notification success">
+        <div v-else-if="state.notification.type === 'success'" class="notification success">
           <span class=""><i class="fa-light fa-cloud-check" /></span>
           <span>If an user with this E-Mail exists,<br />You will receive an E-Mail!</span>
         </div>
-        <div v-else-if="notification === 'error'" class="notification error">
+        <div v-else-if="state.notification.type === 'error'" class="notification error">
           <span><i class="fa-light fa-circle-exclamation fa-beat-fade"/></span>
-          <span>{{ notificationMessage }}</span>
+          <span>{{ state.notification.message }}</span>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-// TODO: CLIENT AREA / MULTI PAGE REDIRECTION / client.l03.dev / duplicate project / new sidebar etc. / faster main page
-import useVuelidate from "@vuelidate/core";
-import { required, email, helpers } from "@vuelidate/validators";
-import {apiURL, loginState} from "assets/js/auth";
-import axios from "axios";
 
-
-export default {
-  name: "ForgotPasswordView",
-  setup() {
-    return {
-      v$: useVuelidate(),
-    };
-  },
-  data() {
-    return {
-      mail: "",
-      notification: false,
-      notificationMessage: "",
-    };
-  },
-  mounted() {
-    if (loginState()) { this.$router.push('/'); }
-  },
-  validations() {
-    return {
-      mail: {
-        email: helpers.withMessage("Please enter a valid E-Mail.", email),
-        required: helpers.withMessage("E-Mail is required.", required),
-      },
-    }
-  },
-  methods: {
-    async handleRequest() {
-      this.v$.$touch();
-      console.log("DEV-LOG | 1. Trying to Request a Reset-Password link...");
-      if (!this.v$.$invalid) {
-        console.log("DEV-LOG | 2. Form Validation successfully");
-        const res = axios.post(
-            apiURL() + "api/auth/forgot-password",
-            {
-              email: this.mail,
-            }
-        );
-        this.notification = "loading";
-        // eslint-disable-next-line no-unused-vars
-        res.then((response) => {
-          this.notification = "success";
-          console.log("DEV-LOG | 3. Reset Password Request successfully;");
-          setTimeout(() => {
-            this.notification = false;
-          }, 3500);
-        });
-        res.catch((response) => {
-          console.log("DEV-LOG | 3. Reset Password Request failed;", response);
-          this.notification = "error";
-          this.notificationMessage = response.response.data.error.message;
-          setTimeout(() => {
-            this.notification = false;
-          }, 3500);
-        });
-      }
-    },
-  },
-};
-</script>
 <style lang="sass" scoped>
 .gradient-border
   -webkit-backdrop-filter: blur(10px)

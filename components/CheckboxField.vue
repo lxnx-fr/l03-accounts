@@ -1,17 +1,40 @@
+<script setup lang="ts">
+defineProps({
+  name: {
+    type: String,
+    default: "Default Name"
+  },
+  label: {
+    type: String,
+    default: "Default Label"
+  },
+  labelColor: {
+    type: String,
+    default: "#fff",
+  },
+  iconColor: {
+    type: String,
+    default: "#fff",
+  },
+  error: {
+    type: String,
+    default: null,
+  },
+});
+</script>
+
 <template>
-  <div :id="'checkbox__' + name" class="checkbox-wrapper">
+  <div class="checkbox-wrapper">
     <div class="field-box">
-      <input
-          :id="'checkboxfield__' + name"
+      <input :id="'cbf__' + name"
         ref="fieldInput"
         class="field-checkbox"
         :name="name"
         type="checkbox"
-        @input="handleInput"
-        @blur="handleInput"
+        @input="$emit('field:input', this.$refs.fieldInput.checked)"
+        @blur="$emit('field:input', this.$refs.fieldInput.checked)"
       />
-
-      <label class="field-label" :for="'checkboxfield__' + name">
+      <label class="field-label" :for="'cbf__' + name">
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M22.3,61.3c5.7,4.1,13.2,11.8,16.7,18C53,60.5,66,41,77.7,20.8"
@@ -25,39 +48,6 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  name: "CheckboxField",
-  props: {
-    name: {
-      type: String,
-      default: "Default Name",
-    },
-    label: {
-      type: String,
-      default: "Default Label",
-    },
-    labelColor: {
-      type: String,
-      default: "#fff",
-    },
-    iconColor: {
-      type: String,
-      default: "#fff",
-    },
-    error: {
-      type: String,
-      default: null,
-    },
-  },
-  emits: ["field:input"],
-  methods: {
-    handleInput() {
-      this.$emit("field:input", this.$refs.fieldInput.checked);
-    },
-  },
-};
-</script>
 
 <style lang="sass" scoped>
 .checkbox-wrapper

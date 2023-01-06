@@ -1,3 +1,107 @@
+
+
+<script setup>
+import useVuelidate from "@vuelidate/core";
+import axios from "axios";
+import {email, helpers, maxLength, minLength, required, sameAs} from "@vuelidate/validators";
+const router = useRouter();
+
+onMounted(() => {
+  if (loginState()) { router.push('/'); }
+})
+
+const state = reactive({
+  fullName: "",
+  username: "",
+  mail: "",
+  password: "",
+  confirmPassword: "",
+  termsBox: "",
+  showPassword: false,
+  notification: false,
+})
+
+const rules = {
+  username: {
+    required: helpers.withMessage("Username is required.", required),
+    minLength: helpers.withMessage(
+        "Username must 3 or more characters",
+        minLength(3)
+    ),
+    maxLength: helpers.withMessage(
+        "Username must shorter than 20 characters",
+        maxLength(20)
+    ),
+  },
+  mail: {
+    email: helpers.withMessage("Please enter a valid E-Mail.", email),
+    required: helpers.withMessage("E-Mail is required.", required),
+  },
+  password: {
+    required: helpers.withMessage("Password is required.", required),
+    minLength: helpers.withMessage(
+        "Password must be 8 or more chars.",
+        minLength(8)
+    ),
+    maxLength: helpers.withMessage(
+        "Password must shorter than 64 chars.",
+        maxLength(64)
+    ),
+  },
+  confirmPassword: {
+    required: helpers.withMessage("Confirm Password is required.", required),
+    sameAs: helpers.withMessage("Passwords must match", sameAs(state.password)),
+  },
+  termsBox: {
+    checked: helpers.withMessage(
+        "You must accept our Terms of Services",
+        isChecked
+    ),
+  },
+}
+
+const v$ = useVuelidate(rules, state);
+function isChecked() {
+  return state.termsBox === true;
+}
+
+async function handleRegister() {
+  this.v$.$touch();
+  const btnSubmit = document.querySelector('.auth-container .btn-submit');
+  if (!this.v$.$invalid) {
+    const res = axios.post(apiURL() + "api/auth/local/register",
+        {
+          email: state.mail,
+          password: state.password,
+          username: state.username,
+          fullname: state.fullName,
+        }
+    );
+    btnSubmit.disabled = true;
+    state.notification = "loading";
+    res.then((response) => {
+      state.notification = {
+        type: "success",
+        message: response.data.user.username
+      };
+      setTimeout(() => {
+        state.notification = false;
+        router.push('/login');
+      }, 2500);
+    });
+    res.catch((response) => {
+      state.notification = {
+        type: "error",
+        message: response.response.data.error.message
+      }
+      setTimeout(() => {
+        state.notification = false;
+        btnSubmit.disabled = false;
+      }, 2500);
+    });
+  }
+}
+</script>
 <template>
   <div class="auth-page">
     <div class="auth-container">
@@ -12,7 +116,7 @@
               label-color="#FFFFFF7F"
               icon-color="#FFFFFFE5"
               prepend="fa-solid fa-user"
-              @field:input="fullName = $event;"
+              @field:input="state.fullName = $event;"
           />
           <TextField
               name="username"
@@ -21,7 +125,7 @@
               label-color="#FFFFFF7F"
               icon-color="#FFFFFFE5"
               :error="v$.username.$errors.length > 0 ? v$.username.$errors[0].$message : null"
-              @field:input="username = $event; v$.username.$touch();"
+              @field:input="state.username = $event; v$.username.$touch();"
           />
           <TextField
               name="email"
@@ -31,31 +135,31 @@
               type="email"
               prepend="fa-solid fa-envelope"
               :error="v$.mail.$errors.length > 0 ? v$.mail.$errors[0].$message : null"
-              @field:input="mail = $event; v$.mail.$touch();"
+              @field:input="state.mail = $event; v$.mail.$touch();"
           />
           <TextField
               name="password"
               label-color="#FFFFFF7F"
               icon-color="#FFFFFFE5"
-              :type="showPassword ? 'text' : 'password'"
+              :type="state.showPassword ? 'text' : 'password'"
               prepend="fa-solid fa-lock"
-              :append="showPassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
+              :append="state.showPassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
               label="Password"
               :error="v$.password.$errors.length > 0 ? v$.password.$errors[0].$message : null"
-              @field:input="password = $event; v$.password.$touch();"
-              @click:append="showPassword = !showPassword"
+              @field:input="state.password = $event; v$.password.$touch();"
+              @click:append="state.showPassword = !state.showPassword"
           />
           <TextField
               name="confirm-password"
-              :type="showPassword ? 'text' : 'password'"
+              :type="state.showPassword ? 'text' : 'password'"
               label-color="#FFFFFF7F"
               icon-color="#FFFFFFE5"
               prepend="fa-solid fa-lock"
-              :append="showPassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
+              :append="state.showPassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
               label="Confirm Password"
               :error="v$.confirmPassword.$errors.length > 0 ? v$.confirmPassword.$errors[0].$message : null"
-              @field:input="confirmPassword = $event; v$.confirmPassword.$touch();"
-              @click:append="showPassword = !showPassword"
+              @field:input="state.confirmPassword = $event; v$.confirmPassword.$touch();"
+              @click:append="state.showPassword = !state.showPassword"
           />
           <CheckboxField
               label-color="#FFFFFFD9"
@@ -63,7 +167,7 @@
               name="terms"
               label="Accept Terms of Services"
               :error="v$.termsBox.$errors.length > 0 ? v$.termsBox.$errors[0].$message : null"
-              @field:input="termsBox = $event; v$.termsBox.$touch();"
+              @field:input="state.termsBox = $event; v$.termsBox.$touch();"
           />
         </form>
       </ClientOnly>
@@ -75,146 +179,23 @@
           Already have an account? Login
         </NuxtLink>
       </div>
-      <div v-show="notification !== false" class="notification-wrapper">
-        <div v-if="notification === 'loading'" class="notification loading">
+      <div v-show="state.notification !== false" class="notification-wrapper">
+        <div v-if="state.notification.type === 'loading'" class="notification loading">
           <span class="pt-1"><i class="fa-duotone fa-spinner-third fa-spin"/></span>
           <span>Loading...</span>
         </div>
-        <div v-else-if="notification === 'success'" class="notification success">
+        <div v-else-if="state.notification.type === 'success'" class="notification success">
           <span><i class="fa-light fa-cloud-check" /></span>
-          <span>Created account, {{ notificationMessage }}!</span>
+          <span>Created account, {{ state.notification.message }}!</span>
         </div>
-        <div v-else-if="notification === 'error'" class="notification error">
+        <div v-else-if="state.notification.type === 'error'" class="notification error">
           <span><i class="fa-light fa-circle-exclamation fa-beat-fade" /></span>
-          <span>{{ notificationMessage }}</span>
+          <span>{{ state.notification.message }}</span>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<script>
-import useVuelidate from "@vuelidate/core";
-import {
-  required,
-  email,
-  minLength,
-  maxLength,
-  helpers,
-} from "@vuelidate/validators";
-import { loginState, apiURL } from "/assets/js/auth";
-import axios from "axios";
-function samePassword() {
-  return this.password === this.confirmPassword;
-}
-function isChecked() {
-  return this.termsBox === true;
-}
-export default {
-  name: "create-account",
-  setup() {
-    return {
-      v$: useVuelidate(),
-    };
-  },
-  mounted() {
-    if (loginState()) { this.$router.push({ path: "/"}); }
-  },
-  data() {
-    return {
-      fullName: "",
-      username: "",
-      mail: "",
-      password: "",
-      confirmPassword: "",
-      termsBox: "",
-      showPassword: false,
-      notification: false,
-      notificationMessage: "",
-    };
-  },
-  validations() {
-    return {
-      username: {
-        required: helpers.withMessage("Username is required.", required),
-        minLength: helpers.withMessage(
-            "Username must 3 or more characters",
-            minLength(3)
-        ),
-        maxLength: helpers.withMessage(
-            "Username must shorter than 20 characters",
-            maxLength(20)
-        ),
-      },
-      mail: {
-        email: helpers.withMessage("Please enter a valid E-Mail.", email),
-        required: helpers.withMessage("E-Mail is required.", required),
-      },
-      password: {
-        required: helpers.withMessage("Password is required.", required),
-        minLength: helpers.withMessage(
-            "Password must be 8 or more chars.",
-            minLength(8)
-        ),
-        maxLength: helpers.withMessage(
-            "Password must shorter than 64 chars.",
-            maxLength(64)
-        ),
-      },
-      confirmPassword: {
-        required: helpers.withMessage("Confirm Password is required.", required),
-        sameAs: helpers.withMessage("Passwords must match", samePassword),
-      },
-      termsBox: {
-        checked: helpers.withMessage(
-            "You must accept our Terms of Services",
-            isChecked
-        ),
-      },
-    }
-  },
-  methods: {
-    async handleRegister() {
-      this.v$.$touch();
-      console.log("DEV-LOG | 1. Trying Registering Account...");
-      if (!this.v$.$invalid) {
-        console.log("DEV-LOG | 2. Form Validation successfully");
-        const res = axios.post(apiURL() + "api/auth/local/register",
-            {
-              email: this.mail,
-              password: this.password,
-              username: this.username,
-              fullname: this.fullName,
-            }
-        );
-        document.querySelector('.auth-container .btn-submit').disabled = true;
-        this.notification = "loading";
-        res.then((response) => {
-          console.log(
-              "DEV-LOG | 3. Registration successfully;",
-              response.data
-          );
-          this.notification = "success";
-          this.notificationMessage = response.data.user.username;
-          setTimeout(() => {
-            this.notification = false;
-            this.$router.push("/login");
-            document.querySelector('.auth-container .btn-submit').disabled = false;
-          }, 2500);
-        });
-        res.catch((response) => {
-          console.log("DEV-LOG | 3. Registration failed;", response);
-          this.notification = "error";
-          setTimeout(() => {
-            this.notification = false;
-            document.querySelector('.auth-container .btn-submit').disabled = false;
-          }, 3000);
-        });
-      }
-    },
-  },
-};
-</script>
 <style lang="sass" scoped>
 .gradient-border
   -webkit-backdrop-filter: blur(10px)

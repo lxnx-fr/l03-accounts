@@ -1,34 +1,101 @@
+<script setup lang="ts">
+import {HTML} from "stylehacks/types/dictionary/tags";
+
+const props = defineProps({
+  label: {
+    default: "Default Label",
+    type: String,
+  },
+  labelAddon: {
+    default: null,
+    type: String,
+  },
+  name: {
+    default: "defaultName",
+    type: String,
+  },
+  type: {
+    default: "text",
+    type: String,
+  },
+  error: {
+    default: null,
+    type: String,
+  },
+  prepend: {
+    default: null,
+    type: String,
+  },
+  append: {
+    default: null,
+    type: String,
+  },
+  labelColor: {
+    default: "#fff",
+    type: String
+  },
+  iconColor: {
+    default: "#fff",
+    type: String
+  },
+  lineColor: {
+    default: "#fff",
+    type: String
+  },
+  inputColor: {
+    default: "#fff",
+    type: String
+  },
+})
+const appendWrapper = ref<any>(null)
+const prependWrapper = ref<any>(null)
+
+watch(() => props.append, (newAppend) => {
+  const appendIcon:any = document.createElement("i");
+  appendIcon.classList = newAppend;
+  appendWrapper.value.innerHTML = ""
+  appendWrapper.value.append(appendIcon);
+})
+watch(() => props.prepend, (newPrepend) => {
+  let prependIcon:any = document.createElement("i");
+  prependIcon.classList = newPrepend;
+  prependWrapper.value.innerHTML = ""
+  prependWrapper.value.append(prependIcon);
+})
+</script>
 <template>
-  <div :id="'field__' + name" ref="fieldWrapper" class="field-wrapper">
+  <div class="field-wrapper">
     <div
       v-if="prepend !== null"
       ref="prependWrapper"
       class="prepend-wrapper"
-      @click="handlePrependClick"
+      @click="$emit('click:prepend');"
     >
-      <!--<Icon :name="prepend" />-->
       <i :class="prepend" />
     </div>
     <div class="field-box">
-      <input
-          :id="'textfield__' + name"
+      <input :id="'tf__' + name"
         ref="fieldInput"
         :type="type"
         class="field-input"
         :name="name"
         placeholder=" "
-        @input="handleInput"
-        @blur="handleInput"
+        @input="$emit('field:input', this.$refs.fieldInput.value)"
+        @blur="$emit('field:input', this.$refs.fieldInput.value)"
       />
-      <label class="field-label" :for="'textfield__' + name" >{{ label }}<span v-if="labelAddon !== null">{{ labelAddon }}</span></label>
+      <label class="field-label" :for="'tf__' + name" >
+        {{ label }}
+        <span v-if="labelAddon !== null">
+          {{ labelAddon }}
+        </span>
+      </label>
       <div class="field-line" />
       <div
         v-if="append !== null"
         ref="appendWrapper"
         class="append-wrapper"
-        @click="handleAppendClick"
+        @click="$emit('click:append');"
       >
-        <!--<Icon :name="append" />-->
         <i :class="append" />
       </div>
       <div v-if="error !== null" class="field-error">
@@ -39,92 +106,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: "TextField",
-  props: {
-    label: {
-      default: "Default Label",
-      type: String,
-    },
-    labelAddon: {
-      default: null,
-      type: String,
-    },
-    name: {
-      default: "defaultName",
-      type: String,
-    },
-    type: {
-      default: "text",
-      type: String,
-    },
-    error: {
-      default: null,
-      type: String,
-    },
-    prepend: {
-      default: null,
-      type: String,
-    },
-    append: {
-      default: null,
-      type: String,
-    },
-    labelColor: {
-      default: "#fff",
-      type: String
-    },
-    iconColor: {
-      default: "#fff",
-      type: String
-    },
-    lineColor: {
-      default: "#fff",
-      type: String
-    },
-    inputColor: {
-      default: "#fff",
-      type: String
-    },
-  },
-  emits: ["click:prepend", "click:append", "field:input"],
-  data() {
-    return {
-      fieldValue: "",
-    };
-  },
-  watch: {
-    append: function (newVal) {
-      let appendIcon = document.createElement("i");
-      appendIcon.classList = newVal;
-      this.$refs.appendWrapper.innerHTML = "";
-      // animejs scale 100 -> 0 / 0 -> 100 animation
-      this.$refs.appendWrapper.append(appendIcon);
-    },
-    prepend: function (newVal) {
-      let prependIcon = document.createElement("i");
-      prependIcon.classList = newVal;
-      this.$refs.prependWrapper.innerHTML = "";
-      this.$refs.prependWrapper.append(prependIcon);
-    },
-  },
-
-  methods: {
-    handleAppendClick() {
-      this.$emit("click:append");
-    },
-    handlePrependClick() {
-      this.$emit("click:prepend");
-    },
-    handleInput() {
-      this.$emit("field:input", this.$refs.fieldInput.value);
-    },
-  },
-};
-</script>
-
 <style lang="sass" scoped>
 
 .field-wrapper

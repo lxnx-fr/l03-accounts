@@ -1,5 +1,78 @@
+
+
+<script setup>
+import axios from "axios";
+
+const router = useRouter();
+const state = reactive({
+  username: "",
+  avatar: "",
+  user: null,
+  avatarUrl: "",
+  loadingError: null,
+  editing: false,
+  websites: {},
+  activeContainer: ''
+})
+onMounted(() => {
+  if (loginState()) {
+    loadAvatar()
+    loadWebsites()
+    loadUserData()
+  } else router.push('/login');
+})
+function loadWebsites() {
+  const req = axios.get(apiURL() + "api/users/me?populate=msites&fields=id", {
+    headers: {
+      Authorization: "Bearer " + getData("user.token")
+    }
+  });
+  req.then((response) => {
+    state.websites = response.data.msites;
+  });
+  req.catch((response) => {
+    state.loadingError = response;
+  });
+}
+function loadAvatar() {
+  const req = axios.get(apiURL() + "api/users/me?populate=avatar", {
+    headers: {
+      Authorization: "Bearer " + getData("user.token")
+    }
+  });
+  req.then((response) => {
+    state.avatarUrl = response.data.avatar.url;
+  });
+  req.catch((response) => {
+    state.loadingError = response;
+  });
+}
+function loadUserData() {
+  const request = axios.get(apiURL() + "api/users/me", {
+    headers: {
+      Authorization: "Bearer " + getData("user.token")
+    },
+  });
+  request.then((response) => {
+    console.log("Nuxt | Downloading user data", response);
+    state.user = response.data
+  });
+  request.catch((response) => {
+    console.log(
+        "Nuxt | Error while downloading user data",
+        response
+    );
+  });
+}
+function handleLogout() {
+  state.user = null;
+  removeData("user.token")
+  router.push('/login');
+}
+</script>
+
 <template>
-  <div v-if="user" class="dashboard-page">
+  <div v-if="state.user" class="dashboard-page">
     <a class="back-home-btn gradient-border" @click="handleLogout">
       Logout
     </a>
@@ -120,94 +193,6 @@
     </div>
   </div>
 </template>
-
-<script>
-import {apiURL, getData, loginState, removeData} from "/assets/js/auth";
-import axios from "axios";
-export default {
-  name: "index",
-  data() {
-    return {
-      username: "l03",
-      avatar: "",
-      user: null,
-      avatarUrl: "",
-      loadingError: null,
-      editing: false,
-      websites: {},
-      activeContainer: 'websites'
-    };
-  },
-  mounted() {
-    if (loginState()) {
-      console.log("Nuxt | Try Retrieving data from local user");
-      this.loadAvatar();
-      this.loadUserData();
-      this.loadWebsites();
-    } else {
-      this.$router.push('/login');
-    }
-  },
-  methods: {
-    handleLogout() {
-      this.user = null;
-      removeData("user.token")
-      this.$router.push('/login');
-    },
-    handleEdit() {
-      this.editing = !this.editing;
-      document.querySelector(".profile-container").classList.toggle("editing");
-    },
-
-    loadWebsites() {
-      const req = axios.get(apiURL() + "api/users/me?populate=msites&fields=id",
-          {
-            headers: {
-              Authorization: "Bearer " + getData("user.token")
-            }
-          }
-      );
-      req.then((response) => {
-        this.websites = response.data.msites;
-      });
-      req.catch((response) => {
-        this.loadingError = response;
-      });
-    },
-    loadAvatar() {
-      const req = axios.get(apiURL() + "api/users/me?populate=avatar",
-          {
-            headers: {
-              Authorization: "Bearer " + getData("user.token")
-            }
-          }
-      );
-      req.then((response) => {
-        this.avatarUrl = response.data.avatar.url;
-      });
-      req.catch((response) => {
-        this.loadingError = response;
-      });
-    },
-    loadUserData() {
-      const request = axios.get(apiURL() + "api/users/me", {
-        headers: { Authorization: "Bearer " + getData("user.token") },
-      });
-      request.then((response) => {
-        console.log("Nuxt | Downloading user data", response);
-        this.user = response.data
-      });
-      request.catch((response) => {
-        console.log(
-            "Nuxt | Error while downloading user data",
-            response
-        );
-      });
-    }
-  },
-};
-</script>
-
 <style lang="sass">
 .gradient-border
   -webkit-backdrop-filter: blur(10px)
