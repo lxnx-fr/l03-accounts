@@ -4,6 +4,7 @@ import {required, helpers, minLength, maxLength } from "@vuelidate/validators";
 import axios from "axios";
 
 const router = useRouter();
+const route = useRoute();
 
 onMounted(() => {
   if (loginState()) {
@@ -40,7 +41,7 @@ async function handleRequest() {
   if (!v$.value.$invalid) {
     console.log("DEV-LOG | 2. Form Validation successfully");
     const res = axios.post(apiURL() + "api/auth/reset-password", {
-      code: router.params.code,
+      code: route.params.code,
       password: state.password,
       passwordConfirmation: state.confirmPassword,
     });
