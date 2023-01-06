@@ -5,6 +5,8 @@
     <NuxtPage />
   </div>
 </template>
+<script setup>
+</script>
 <style lang="sass">
 @font-face
   font-family: 'NexaLight'
