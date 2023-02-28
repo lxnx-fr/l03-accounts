@@ -12,23 +12,23 @@ const state = reactive({
   loadingError: null,
   editing: false,
   websites: {},
+  codesnippets: {},
   activeContainer: ''
 })
 onMounted(() => {
   if (loginState()) {
-    loadAvatar()
-    loadWebsites()
-    loadUserData()
+    loadUserData();
+    loadCodeSnippets();
   } else router.push('/login');
 })
-function loadWebsites() {
-  const req = axios.get(apiURL + "api/users/me?populate=msites&fields=id", {
+function loadCodeSnippets() {
+  const req = axios.get(apiURL + "api/users/me?fields=id&populate[codesplits][fields]=id", {
     headers: {
       Authorization: "Bearer " + getData("user.token")
     }
   });
   req.then((response) => {
-    state.websites = response.data.msites;
+    state.codesnippets = response.data.codesplits;
   });
   req.catch((response) => {
     state.loadingError = response;
@@ -78,56 +78,17 @@ function handleLogout() {
     </a>
     <div class="statistics-container animate-fadescale">
       <h1>Statistics</h1>
+      <NuxtLink to="/codesnippets" class="statistic-box">
+        <div class="title">
+          Code Snippets
+        </div>
+        <div class="value">{{ state.codesnippets.length }}</div>
+      </NuxtLink>
       <div class="statistic-box">
         <div class="title">
-          Websites
+          URL Shorts
         </div>
-        <div class="value">14</div>
-      </div>
-      <div class="statistic-box">
-        <div class="title">
-          Customers
-        </div>
-        <div class="value">5</div>
-      </div>
-      <div class="statistic-box">
-        <div class="title">
-          Invoices
-        </div>
-        <div class="value">42</div>
-      </div>
-      <div class="statistic-box">
-        <div class="title">
-          Revisions
-        </div>
-        <div class="value">236</div>
-      </div>
-    </div>
-    <div class="statistics-container">
-      <h1>Statistics</h1>
-      <div class="statistic-box">
-        <div class="title">
-          Websites
-        </div>
-        <div class="value">14</div>
-      </div>
-      <div class="statistic-box">
-        <div class="title">
-          Customers
-        </div>
-        <div class="value">5</div>
-      </div>
-      <div class="statistic-box">
-        <div class="title">
-          Invoices
-        </div>
-        <div class="value">42</div>
-      </div>
-      <div class="statistic-box">
-        <div class="title">
-          Revisions
-        </div>
-        <div class="value">236</div>
+        <div class="value">23</div>
       </div>
     </div>
     <!--<div v-if="activeContainer === 'w'" class="websites-container">
@@ -194,21 +155,6 @@ function handleLogout() {
   </div>
 </template>
 <style lang="sass">
-.gradient-border
-  -webkit-backdrop-filter: blur(10px)
-  backdrop-filter: blur(10px)
-  @apply relative bg-[rgba(20,20,20,0.3)]
-  &::before
-    background: linear-gradient(90deg,#303030 0%,#303030 25%,#00dc82 50%,#36e4da 75%,#0047e1 100%)
-    background-size: 400% auto
-    transition: background-position 0.3s ease-in-out, opacity 0.2s ease-in-out
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
-    -webkit-mask-composite: xor
-    mask-composite: exclude
-    @apply absolute content-[''] top-0 left-0 right-0 bottom-0 p-[2px] w-full opacity-50
-  &:hover::before
-    background-position: -50% 0
-    opacity: 1
 .dashboard-loading-page
   @apply text-center mx-auto h-screen flex items-center justify-center flex-col gap-6 font-sans
 .dashboard-loading-container
@@ -230,43 +176,8 @@ function handleLogout() {
     @apply text-sm md:text-sm
   .statistic-box
     @apply text-xl py-5 px-2 cursor-pointer max-w-xs w-full gradient-border
-
 .back-home-btn
   @apply cursor-pointer animate-fadescale absolute top-2 left-4 md:left-10 md:top-8 text-white text-lg font-sans px-4 py-2 flex
-.websites-container
-  @apply bg-orange-400 duration-300 transition-all ease-in-out rounded-lg
-  @apply p-4 grid grid-cols-4 col-span-full justify-start items-center relative w-full gap-4 overflow-hidden
-  .container-title
-    @apply text-left text-3xl col-span-full text-white
-  .website-box
-    @apply rounded-lg col-span-2 text-center text-lg p-4 bg-white bg-opacity-25
-    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.42)
-    .website-id
-      @apply text-left text-2xl absolute bottom-1.5 left-3
-    .website-status
-      @apply text-right absolute bottom-1.5 right-3
-      &.working
-        @apply text-green-500
-.website-container
-  @apply bg-white duration-300 transition-all ease-in-out rounded-lg
-  @apply p-4 grid col-span-6  justify-start items-center relative w-full
-  .container-title
-    @apply text-left text-3xl
-  .btn-container
-    @apply absolute  top-0 w-fit h-fit
-    .btn-add, .btn-remove
-      @apply bg-black text-white  w-fit h-fit rounded-full px-3 py-1 m-2 select-none transition-all duration-300 ease-in-out
-      &:hover
-        box-shadow: 0 2px 20px 0 #5A2BE1
-        @apply bg-violet-700 text-white
-  .website-data
-    @apply p-2 rounded-md
-    h1
-      @apply text-center
-    .data-row
-      @apply text-white grid grid-cols-7 text-center bg-neutral-800 my-2 py-3 rounded-full
-    .working
-      @apply text-green-500
 
 
 </style>

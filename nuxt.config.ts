@@ -5,6 +5,9 @@ export default defineNuxtConfig({
         '@nuxtjs/robots',
         '@nuxtjs/tailwindcss',
     ],
+    tailwindcss: {
+        cssPath: '~/assets/css/tailwind.sass'
+    },
     app: {
         baseURL: "",
         head: {

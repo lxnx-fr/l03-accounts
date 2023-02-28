@@ -1,0 +1,32 @@
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+@layer utilities
+  .gradient-border
+    -webkit-backdrop-filter: blur(10px)
+    backdrop-filter: blur(10px)
+    @apply relative bg-[rgba(20,20,20,0.3)]
+    &::before
+      background: linear-gradient(90deg,#303030 0%,#303030 25%,#00dc82 50%,#36e4da 75%,#0047e1 100%)
+      background-size: 400% auto
+      transition: background-position 0.3s ease-in-out, opacity 0.2s ease-in-out
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
+      -webkit-mask-composite: xor
+      mask-composite: exclude
+      @apply absolute content-[''] top-0 left-0 right-0 bottom-0 p-[2px] w-full opacity-50
+    &:hover::before
+      background-position: -50% 0
+      opacity: 1
+  .main-card
+    @apply grid place-items-center px-8 py-4 min-w-min w-[calc(90vw-1rem)]
+    @apply sm:w-full sm:max-w-md
+    @apply bg-white bg-opacity-5 z-20 text-white text-opacity-80
+    .card-title
+      @apply text-3xl
+    .card-subtitle
+      @apply text-sm
+    .card-box
+      @apply gradient-border px-8 py-2 my-1.5 w-full flex gap-4
+      .title
+        @apply text-amber-500

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const props = defineProps({
   label: {
     default: "Default Label",
@@ -51,7 +50,7 @@ const prependWrapper = ref<any>(null)
 
 watch(() => props.append, (newAppend) => {
   const appendIcon:any = document.createElement("i");
-  appendIcon.classList = newAppend;
+  appendIcon.classList = newAppend
   appendWrapper.value.innerHTML = ""
   appendWrapper.value.append(appendIcon);
 })

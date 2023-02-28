@@ -10,7 +10,7 @@ onMounted(() => {
   if (loginState()) {
     router.push('/')
   }
-});
+})
 const state = reactive({
   password: "",
   confirmPassword: "",
@@ -103,7 +103,7 @@ async function handleRequest() {
               icon-color="rgba(255,255,255,0.9)"
               :error="v$.confirmPassword.$errors.length > 0 ? v$.confirmPassword.$errors[0].$message : null"
               @field:input="state.confirmPassword = $event; v$.confirmPassword.$touch();"
-              @click:append="state.showPassword = !state.showPassword"
+              @click:append="() => { state.showPassword = !state.showPassword }"
           />
         </form>
       </ClientOnly>
@@ -142,21 +142,6 @@ async function handleRequest() {
   </div>
 </template>
 <style lang="sass">
-.gradient-border
-  -webkit-backdrop-filter: blur(10px)
-  backdrop-filter: blur(10px)
-  @apply relative bg-[rgba(20,20,20,0.3)]
-  &::before
-    background: linear-gradient(90deg,#303030 0%,#303030 25%,#00dc82 50%,#36e4da 75%,#0047e1 100%)
-    background-size: 400% auto
-    transition: background-position 0.3s ease-in-out, opacity 0.2s ease-in-out
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
-    -webkit-mask-composite: xor
-    mask-composite: exclude
-    @apply absolute content-[''] top-0 left-0 right-0 bottom-0 p-[2px] w-full opacity-50
-  &:hover::before
-    background-position: -50% 0
-    opacity: 1
 .auth-page
   @apply text-center mx-auto h-screen max-h-screen flex items-center justify-center
   .auth-container
@@ -168,7 +153,7 @@ async function handleRequest() {
     .form-wrapper
       @apply my-4
     .btn-submit
-      @apply py-2.5 text-xl text-white text-opacity-80 max-w-xs w-full cursor-pointer gradient-border
+      @apply py-2.5 text-xl text-white text-opacity-80 max-w-xs w-full cursor-pointer gradient-border-1
     .link-wrapper
       @apply mt-2
       .link

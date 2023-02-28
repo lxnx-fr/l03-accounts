@@ -1,4 +1,5 @@
 <template>
+  <TWScreen />
   <div class="bg-spotlight" />
   <div class="bg-spotlight" />
   <NuxtPage />

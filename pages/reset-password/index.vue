@@ -8,7 +8,7 @@
         No Code Provided
       </p>
       <div class="w-full flex items-center justify-center">
-        <NuxtLink to="/" class="gradient-border text-md sm:text-xl py-2 px-4 sm:py-3 sm:px-6 cursor-pointer">
+        <NuxtLink to="/" class="gradient-border-1 sm:text-xl py-2 px-4 sm:py-3 sm:px-6 cursor-pointer">
           Go back Home
         </NuxtLink>
       </div>
@@ -22,19 +22,4 @@
   height: 40vh
   bottom: -30vh
   @apply fixed left-0 right-0 blur-[20vh] z-10
-.gradient-border
-  -webkit-backdrop-filter: blur(10px)
-  backdrop-filter: blur(10px)
-  @apply relative bg-[rgba(20,20,20,0.3)]
-  &::before
-    background: linear-gradient(90deg,#303030 0%,#303030 25%,#00dc82 50%,#36e4da 75%,#0047e1 100%)
-    background-size: 400% auto
-    transition: background-position 0.3s ease-in-out, opacity 0.2s ease-in-out
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)
-    -webkit-mask-composite: xor
-    mask-composite: exclude
-    @apply absolute content-[''] top-0 left-0 right-0 bottom-0 p-[2px] w-full opacity-50
-  &:hover::before
-    background-position: -50% 0
-    opacity: 1
 </style>
