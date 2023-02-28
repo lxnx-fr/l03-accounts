@@ -37,7 +37,7 @@ function samePassword() {
 async function handleRequest() {
   v$.value.$touch();
   console.log("DEV-LOG | 1. Trying to Reset-Password...");
-  const btnSubmit: HTMLButtonElement = document.querySelector('.auth-container .btn-submit') as HTMLButtonElement;
+  const btnSubmit: HTMLButtonElement = document.querySelector('.auth-container .submit-btn') as HTMLButtonElement;
   if (!v$.value.$invalid) {
     console.log("DEV-LOG | 2. Form Validation successfully");
     const res = axios.post(apiURL + "api/auth/reset-password", {
@@ -49,7 +49,7 @@ async function handleRequest() {
     state.notification = {
       type: "loading"
     };
-    res.then((response) => {
+    res.then(() => {
       state.notification = {
         type: "success",
         message: "Your user's password has been reset."
@@ -107,7 +107,7 @@ async function handleRequest() {
           />
         </form>
       </ClientOnly>
-      <button class="btn-submit" @click="handleRequest">
+      <button class="submit-btn" @click="handleRequest">
         Reset Password
       </button>
       <div class="link-wrapper">
@@ -142,37 +142,5 @@ async function handleRequest() {
   </div>
 </template>
 <style lang="sass">
-.auth-page
-  @apply text-center mx-auto h-screen max-h-screen flex items-center justify-center
-  .auth-container
-    @apply min-w-min px-14 bg-white bg-opacity-5 py-4 z-20 animate-fadescale
-    .title
-      @apply text-4xl text-opacity-80 text-white
-    .subtitle
-      @apply text-lg text-opacity-50 text-white
-    .form-wrapper
-      @apply my-4
-    .btn-submit
-      @apply py-2.5 text-xl text-white text-opacity-80 max-w-xs w-full cursor-pointer gradient-border-1
-    .link-wrapper
-      @apply mt-2
-      .link
-        @apply m-2 text-xs text-white text-opacity-75 transition-all ease-in-out duration-300
-        &.success:hover
-          @apply text-green-500
-        &.error:hover
-          @apply text-red-500
-    .notification-wrapper
-      @apply animate-fadescale
-      .notification
-        @apply rounded-full bg-white gap-3 flex-row flex px-4 pb-1.5 pt-2 place-items-center mt-4
-        &.loading
-          @apply bg-yellow-500
-          box-shadow: 0 2px 15px 0 #EAB308
-        &.success
-          @apply bg-green-500
-          box-shadow: 0 2px 15px 0 #22C55E
-        &.error
-          @apply bg-red-500
-          box-shadow: 0 2px 15px 0 #EF4444
+@import "../assets/css/auth"
 </style>
